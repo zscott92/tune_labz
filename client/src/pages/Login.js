@@ -1,4 +1,5 @@
-import React from "react";
+import React, { Component } from "react";
+import API from "../utils/API";
 
 function Login (){
 return (
