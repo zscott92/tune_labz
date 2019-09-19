@@ -12,6 +12,7 @@ function App() {
                 <Nav />
                 <Switch>
                     <Route />
+                    <Login />
                     <Route />
                 </Switch>
             </div>
