@@ -10,11 +10,14 @@ function App() {
     return (
         <Router>
             <div>
-                    {/* <Nav />
-                    <Switch>
+                <p>
+                    React App Component
+                </p>
+                    <Nav />
+                    {/* <Switch> */}
                         <Route />
                         <Route />
-                    </Switch> */}
+                    {/* </Switch> */}
             </div>
         </Router>
     );
