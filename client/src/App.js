@@ -10,11 +10,12 @@ function App() {
     return (
         <Router>
             <div>
-                    {/* <Nav />
-                    <Switch>
-                        <Route />
-                        <Route />
-                    </Switch> */}
+                <Nav />
+                <Switch>
+                    <Route />
+                    <Login />
+                    <Route />
+                </Switch>
             </div>
         </Router>
     );
