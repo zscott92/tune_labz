@@ -1,11 +1,6 @@
 {
     "development": {
-      "username": "root",
-      "password": "Jlee1470!!",
-      "database": "metamusic_db",
-      "host": "127.0.0.1",
-      "port": 3306,
-      "dialect": "mysql"
+      "use_env_variable": "DEV_DB"
     },
     "test": {
       "username": "root",
