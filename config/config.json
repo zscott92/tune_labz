@@ -1,10 +1,6 @@
 {
     "development": {
-      "username": "root",
-      "password": "Tweezer92!",
-      "database": "database_dev",
-      "host": "127.0.0.1",
-      "dialect": "mysql"
+      "use_env_variable": "DEV_DB"
     },
     "test": {
       "username": "root",

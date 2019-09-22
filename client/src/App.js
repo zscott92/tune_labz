@@ -1,9 +1,11 @@
 import React from "react";
-import Books from "./pages/Books";
-import Detail from "./pages/Detail";
-import NoMatch from "./pages/NoMatch";
-import Nav from "./components/Nav";
 import { BrowserRouter as Router, Route } from "react-router-dom";
+import Login from "./pages/Login";
+// import Profile from "./pages/Profile";
+// import Search from "./pages/Search";
+// import Splash from "./pages/Splash";
+import Nav from "./components/Nav";
+import Community from "./pages/Community"
 
 function App() {
     return (
@@ -12,6 +14,7 @@ function App() {
                 <Nav />
                 <Switch>
                     <Route />
+                    <Login />
                     <Route />
                 </Switch>
             </div>

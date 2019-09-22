@@ -1,0 +1,44 @@
+{
+  "name": "project3",
+  "version": "1.0.0",
+  "description": "Project3_GTBC",
+  "main": "server.js",
+  "scripts": {
+    "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
+    "start:prod": "node server.js",
+    "start:dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
+    "client": "cd client && npm run start",
+    "install": "cd client && npm install",
+    "build": "cd client && npm run build",
+    "heroku-postbuild": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maxwellmadewell/Project3_GTBC.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/maxwellmadewell/Project3_GTBC/issues"
+  },
+  "homepage": "https://github.com/maxwellmadewell/Project3_GTBC#readme",
+  "dependencies": {
+    "axios": "^0.19.0",
+    "dotenv": "^8.1.0",
+    "express": "^4.17.1",
+    "if-env": "^1.0.4",
+    "jquery": "^3.4.1",
+    "jstree": "^3.3.8",
+    "music-metadata": "^4.6.0",
+    "mysql2": "^1.7.0",
+    "rc-tree": "^3.0.0-alpha.34",
+    "sequelize": "^5.19.0",
+    "spotify-web-api-node": "^4.0.0",
+    "the-wav": "^1.0.2"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.2",
+    "concurrently": "^4.1.2"
+  }
+}
