@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-class Midi extends Component {
+class MidiAudio extends Component {
   function() {
     WebMidi.enable(function (err) {
       if (err) {
@@ -52,3 +52,5 @@ class Midi extends Component {
       })
   }
 };
+
+export default MidiAudio;

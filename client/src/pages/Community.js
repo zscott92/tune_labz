@@ -1,18 +1,19 @@
 import React, { Component } from "react";
-
+import API from "../utils/API";
+import { Tree } from "../components/SongTree";
+import ReactDOM from 'react-dom'
 
 class Community extends Component {
-    state = {
-        song_name: [],
-        song_desc: "",
-        song_pic_url: "",
-        song_genres: []
+    constructor(props) {
+        super(props);
+        this.state = {
+            this:state.Tree = []
+        };
     };
-
+    
     componentDidMount() {
         this.loadSongs();
     }
-
     loadSongs = () => {
         API.getSongs()
             .then(res =>
@@ -20,4 +21,16 @@ class Community extends Component {
             )
             .catch(err => console.log(err));
     };
+
+    render() {
+        return (
+            // <Nav>
+            <div className="container-fluid">
+                <Tree />
+            </div>
+            // </Nav>
+        );
+    }
 }
+
+export default Community;

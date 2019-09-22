@@ -1,10 +1,10 @@
 {
-    "development": {
-      "use_env_variable": "DEV_DB"
+   "development": {
+    "use_env_variable": "DEV_DB"
     },
     "test": {
       "username": "root",
-      "password": null,
+      "password": "Tweezer92!",
       "database": "database_test",
       "host": "127.0.0.1",
       "port": 3306,
@@ -18,4 +18,4 @@
       "port": 3306,
       "dialect": "mysql"
     }
-  }
+}

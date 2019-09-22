@@ -24,6 +24,19 @@ module.exports = function (sequelize, DataTypes) {
         song_genres: {
             type: DataTypes.STRING,
             allowNull: true
+        },
+        song_analysis: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
+        collaborators: {
+            type: DataTypes.STRING,
+            get: function () {
+                return JSON.parse(this.getDataValue(Song.associate.models.User));
+            },
+            set: function (artists) {
+                return this.setDataValue('collaborators', JSON.stringify(artists));
+            }
         }
     });
 
