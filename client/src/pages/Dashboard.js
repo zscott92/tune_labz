@@ -28,9 +28,9 @@ componentDidMount() {
         <Container fluid>
           <Row>
             <Col size="md-6">
-              <Jumbotron>
+              <Tree>
                 <h1>User Song List</h1>
-              </Jumbotron>
+              <SongData>
               {this.state.songs.length ? (
                 <List>
                   {this.state.songs.map(song => (

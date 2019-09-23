@@ -24,6 +24,10 @@ module.exports = function (sequelize, DataTypes) {
         song_genres: {
             type: DataTypes.STRING,
             allowNull: true
+        },
+        song_file: {
+            type: DataTypes.LONGBLOB,
+            allowNull: false
         }
     });
 
