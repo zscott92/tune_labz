@@ -1,7 +1,5 @@
 import React from "react";
 
-
-
 export function UserName(props) {
     return (
         <div className="form-group">
