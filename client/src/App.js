@@ -5,18 +5,16 @@ import Login from "./pages/Login";
 // import Search from "./pages/Search";
 import Home from "./pages/Home";
 import Nav from "./components/Nav";
+import Dashboard from "./pages/Dashboard";
 
 function App() {
     return (
             <div>
-                <Login />
+                <Nav/>
                 <Switch>
-                    <Route />
-                    {/* <Login /> */}
-                    {/* <Profile /> */}
-                    <Community />
-                    {/* <AudioEditor /> */}
-                    <Route />
+                    <Route>
+                    <Dashboard />
+                    </Route>
                 </Switch>
             </div>
     );
