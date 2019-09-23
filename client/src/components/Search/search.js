@@ -1,6 +1,8 @@
 import React, { Compontent } from react;
+require("dotenv")
 
 module.exports = class Search extends React.Component {
+
   constructor(props) {
       
       super(props);
@@ -10,7 +12,9 @@ module.exports = class Search extends React.Component {
       this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    componentDidMount() { 
+  componentDidMount() {
+    const accessToken = "process_env" + soundSource.toUpperCase() + "_ACCESS_TOKEN";
+    const refreshToken = "process_env" + soundSource.toUpperCase() + "_REFRESH_TOKEN";
       const {dispatch, params} = this.props;
       const {accessToken, refreshToken} = params;
       dispatch(setTokens({accessToken, refreshToken}));
