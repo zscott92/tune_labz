@@ -13,7 +13,10 @@ function App() {
                 <Login />
                 <Switch>
                     <Route />
-                    <Nav />
+                    {/* <Login /> */}
+                    {/* <Profile /> */}
+                    <Community />
+                    {/* <AudioEditor /> */}
                     <Route />
                 </Switch>
             </div>

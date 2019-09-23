@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 function Nav() {
+<<<<<<< HEAD
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <Link className="navbar-brand" to="/">
@@ -44,4 +45,19 @@ function Nav() {
 }
 
 export default Nav;
+=======
+    return (
+      <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a className="navbar-brand" href="/">
+          <a href="../SongFeed">Song Feed</a>
+          <a href="../AudioEditor">Editor</a>
+          <a href="../Dashboard">Dashboard</a>
+          <a href="../Profile">Profile</a>
+        </a>
+      </nav>
+    );
+};
+export default Nav;
+  
+>>>>>>> e0a82b686ea158e9116d5950af558cd3ae73ce5b
   
