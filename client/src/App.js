@@ -1,26 +1,20 @@
 import React from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
-
-import { Switch } from "react-router-dom";
-// import Login from "./pages/Login";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Login from "./pages/Login";
 // import Profile from "./pages/Profile";
 // import Search from "./pages/Search";
-// import Splash from "./pages/Splash";
-import Nav from "./components/Nav/index";
-import Community from "./pages/Community";
-// import AudioEditor from ".pages/AudioEditor"
+import Home from "./pages/Home";
+import Nav from "./components/Nav";
+import Dashboard from "./pages/Dashboard";
 
 function App() {
     return (
             <div>
-                <Nav />
+                <Nav/>
                 <Switch>
-                    <Route />
-                    {/* <Login /> */}
-                    {/* <Profile /> */}
-                    <Community />
-                    {/* <AudioEditor /> */}
-                    <Route />
+                    <Route>
+                    <Dashboard />
+                    </Route>
                 </Switch>
             </div>
     );
