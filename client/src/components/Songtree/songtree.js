@@ -1,23 +1,21 @@
-const {GetTree} = require("patternfly-bootstrap-treeview");
+
 const API = require("../utils/API");
-const visualizer = require("../TrackVisualizer")
-const files = require("../../../../routes/filesApi/normalizeFileTypes");
+const {Vizualizer} = require("../TrackVisualizer/visualizer");
+const songs = require("../../../../models");
 
-export class GetTree {
-  function() {
-    return (
-      this.state.files.map((song, key) =>
-        song.id = {
-          key: song.id,
-          name: song.name,
-          owner: song.owner,
-          collaborators: song.collaborators,
-          userImage: song.userImage,
-          visualization: song.visualization,
-          versions: [song.id]
-        }
-      ))
-  };
-};
 
-$('#tree').treeview({ data: getTree() });
+class SongTree extends Component {
+    render() {
+        return (
+            <div className="List">
+                <div className="List-header">
+                    {/* <img src={logo} className="App-logo" alt="logo" /> */}
+                    <h2>Song Dependencies</h2>
+                </div>
+                <Tree nodes={data} />
+            </div>
+        );
+    }
+}
+
+export default SongTree;

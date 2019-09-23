@@ -1,3 +1,6 @@
+import React, { Component } from "react";
+const Spotify = require("../components/Spotify");
+
 class AudioEditor extends Component {
     render() {
         <div className="container-fluid">
@@ -9,8 +12,10 @@ class AudioEditor extends Component {
                     </button>
                 </section>
             </div>
-            <div class="trackDiv"><button className="track">Add Instrument +</button></div>
-            <div class="sampleDiv"><label for="file">Upload Sample</label><input type="file" id="file" name="file" ></input></div>
+            <div className="wavDiv"><button className="convert2Wav">Convert Current File to WAV Format</button></div>
+            <div className="trackDiv"><button className="track">Add MIDI Controller</button></div>
+            <Wrapper >{this.Spotify.props}</Wrapper>
+            <div className="sampleDiv"><label for="file">Upload File From Computer</label><input type="file" id="file" name="file" ></input></div>
             <label for="volume">Volume</label>
             <input type="range" id="volume" className="control-volume" min="0" max="2" value="1" list="gain-vals"
                 step="0.01" data-action="volume" />

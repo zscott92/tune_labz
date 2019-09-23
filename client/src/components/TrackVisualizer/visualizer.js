@@ -2,7 +2,8 @@
 
 import React from "react";
 
-function visualizer() {
+let Visualizer = () => {
+    <div className = "container-fluid">
     <RAudioContext debug={true} onInit={ctx => this.audioContext = ctx}>
         <RPipeline>
             <RBufferSource buffer={this.state.buffer} loop />
@@ -19,7 +20,8 @@ function visualizer() {
                 </RPipeline>
             </RSplitChannels>
         </RPipeline>
-    </RAudioContext>
+        </RAudioContext>
+        </div>
 }
 
-export default visualizer;
+export default Visualizer;

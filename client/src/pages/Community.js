@@ -1,36 +1,36 @@
-import React, { Component } from "react";
-import API from "../utils/API";
-import { Tree } from "../components/SongTree";
-import ReactDOM from 'react-dom'
+// import React, { Component } from "react";
+// import API from "../utils/API";
+// import { Tree } from "../components/SongTree";
+// import ReactDOM from 'react-dom'
 
-class Community extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            this:state.Tree = []
-        };
-    };
+// class Community extends Component {
+//     constructor(props) {
+//         super(props);
+//         let state = {
+//             this:state.Tree = []
+//         };
+//     };
     
-    componentDidMount() {
-        this.loadSongs();
-    }
-    loadSongs = () => {
-        API.getSongs()
-            .then(res =>
-                this.setState({ songs: res.data, song_name: "", song_pic_url: "", song_genres: "" })
-            )
-            .catch(err => console.log(err));
-    };
+//     componentDidMount() {
+//         this.loadSongs();
+//     }
+//     loadSongs = () => {
+//         API.getSongs()
+//             .then(res =>
+//                 this.setState({ songs: res.data, song_name: "", song_pic_url: "", song_genres: "" })
+//             )
+//             .catch(err => console.log(err));
+//     };
 
-    render() {
-        return (
-            // <Nav>
-            <div className="container-fluid">
-                <Tree />
-            </div>
-            // </Nav>
-        );
-    }
-}
+//     render() {
+//         return (
+//             // <Nav>
+//             <div className="container-fluid">
+//                 <Tree />
+//             </div>
+//             // </Nav>
+//         );
+//     }
+// }
 
-export default Community;
+// export default Community;

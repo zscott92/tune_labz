@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import "../../../../routes/fileTransferAPI/fileUploadApi"
+import "../../../../routes/fileTransferAPI/fileUploadApi";
+import API from "../utils/API";
 
 class PlayMusic extends Component {
     function() {
@@ -50,6 +51,31 @@ class PlayMusic extends Component {
             }
             this.setAttribute("aria-checked", state ? "false" : "true");
             console.log(audioCtx.state);
+        }, false);
+
+        function displayTime() {
+            if (audioctx && audioctx.state !== 'closed') {
+                timeDisplay.textContent = 'Current context time: ' + audioctx.currentTime.toFixed(3);
+            } else {
+                timeDisplay.textContent = 'Current context time: No context exists.'
+            }
+            requestAnimationFrame(displayTime);
+        }
+    
+        displayTime() = document.querySelector('time');
+        const playButton = document.querySelector('button');
+    
+        playButton.addEventListener('click', function () {
+            if (audioContext.state === 'suspended') {
+                audioContext.resume();
+            }
+            if (this.dataset.playing === 'false') {
+                audioElement.play();
+                this.dataset.playing = 'true';
+            } else if (this.dataset.playing === 'true') {
+                audioElement.pause();
+                this.dataset.playing = 'false';
+            }
         }, false);
     }
 };

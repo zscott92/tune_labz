@@ -24,4 +24,4 @@ const Howl = require('howler');
     })
   });
 
-module.exports(router, Howl);
+module.exports = { router, Howl };

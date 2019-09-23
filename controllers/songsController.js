@@ -1,5 +1,4 @@
 const db = require("../models");
-const songsFiles = require("../routes/filesAPI");
 
 // Defining methods for the songsController
 module.exports = {
