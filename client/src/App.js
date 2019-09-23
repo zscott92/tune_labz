@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
+
 import { Switch } from "react-router-dom";
 // import Login from "./pages/Login";
 // import Profile from "./pages/Profile";
@@ -11,7 +12,6 @@ import Community from "./pages/Community";
 
 function App() {
     return (
-        <Router>
             <div>
                 <Nav />
                 <Switch>
@@ -23,7 +23,6 @@ function App() {
                     <Route />
                 </Switch>
             </div>
-        </Router>
     );
 }
 
