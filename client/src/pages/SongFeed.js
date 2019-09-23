@@ -3,7 +3,7 @@
 // import { Tree } from "../components/SongTree";
 // import ReactDOM from 'react-dom'
 
-// class Community extends Component {
+// class SongFeed extends Component {
 //     constructor(props) {
 //         super(props);
 //         let state = {
