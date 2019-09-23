@@ -19,11 +19,6 @@ if (process.env.NODE_ENV === "production") {
     app.use(express.static(path.join(__dirname, "./client/build")));
 }
 
-// Start the API server
-app.listen(PORT, function () {
-    console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
-});
-
 // Add routes, both API
 app.use(routes);
 
@@ -33,7 +28,7 @@ if (process.env.NODE_ENV === "production") {
     })
 }
 
-db.sequelize.sync({ force: true }).then(function() {
+db.sequelize.sync().then(function() {
     app.listen(PORT, function() {
         console.log("App listening on PORT " + PORT);
     });

@@ -11,11 +11,11 @@ function App() {
         <Router>
             <div>
                 <Nav />
-                <Switch>
+                {/* <Switch>
                     <Route />
                     <Login />
                     <Route />
-                </Switch>
+                </Switch> */}
             </div>
         </Router>
     );
