@@ -1,8 +1,9 @@
-import React, { Component } from "react";
+import React from "react";
+import API from "../utils/API";
+
 
 function Login() {
     return (
-        <div>
             <div class="container">
                 <br />
                 <div class="jumbotron text-center">
@@ -24,8 +25,8 @@ function Login() {
                     </form>
                 </div>
             </div>
-        </div>
     )
 }
 
 export default Login; 
+
