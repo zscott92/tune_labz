@@ -40,7 +40,6 @@
     "sequelize": "^5.19.0",
     "r-audio": "^1.2.0",
     "rc-tree": "^3.0.0-alpha.34",
-    "sequelize": "^5.19.0",
     "spotify-web-api-node": "^4.0.0",
     "the-wav": "^1.0.2"
   },
