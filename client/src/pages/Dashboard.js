@@ -17,12 +17,28 @@ class Dashboard extends Component {
     this.loadSongs();
   }
 
-  // This function resets the todos displayed with new todos from the database
+  // This loads all of user's songs in library
   loadSongs = () => {
-    API.getSongs()
+    API.getIUserSongs() //TODO add ID parameter to get user specific songs
       .then(res =>
         this.setState({ songs: res.data, song_name: "", song_pic_url: "", song_genres: "", song_visualization: "" })
       )
+      .catch(err => console.log(err));
+  };
+
+  //This loads one clicked song in tree to the song data section of dashboard
+  getSong = () => {
+    API.getSong()
+      .then(res =>
+        this.setState({ songs: res.data, song_name: "", song_pic_url: "", song_genres: "", song_visualization: "" }))
+  }
+
+
+  //onclick function for [+]  for song children for a clicked on song
+  loadChildrenSongs = () => {
+    API.getSongChildren(song_id)
+      .then(res =>
+        this.setState({})) //TODO append children songs to user song objects
       .catch(err => console.log(err));
   };
 

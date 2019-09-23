@@ -4,13 +4,18 @@ import axios from "axios";
 export default {
 
   //==================SONGS===========================
-  //gets alls songs - need to update for specific user
+  //gets alls songs
   getSongs: function () {
     return axios.get("/api/songs");
   },
-  //gets song with given id
-  getSong: function (id) {
-    return axios.get("/api/songs/" + id);
+  //gets song with given user id
+  getUserSongs: function (id) {
+    return axios.get("/api/songs/user/" + id);
+  },
+
+  //gets child songs of a song by song id
+  getSongChildren: function(id) {
+    return axios.get("/api/songs/children/" + id) //TODO need to understand how to pull children
   },
   // Deletes the song with the given id
   deleteSong: function (id) {
@@ -21,9 +26,7 @@ export default {
     return axios.post("/api/songs", songData);
   },
 
-
-//TODO need to add functions that pull songs per user
-//TODO need functions that pull all child songs for a song parent
+//TODO need functions that post songs both parent and child.  How to distinguish between the two??
 
 
   //===================USER===========================
