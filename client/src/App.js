@@ -8,7 +8,6 @@ import Nav from "./components/Nav";
 
 function App() {
     return (
-        <Router>
             <div>
                 <Login />
                 <Switch>
@@ -20,7 +19,6 @@ function App() {
                     <Route />
                 </Switch>
             </div>
-        </Router>
     );
 }
 

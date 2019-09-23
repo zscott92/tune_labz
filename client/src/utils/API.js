@@ -4,7 +4,7 @@ import axios from "axios";
 export default {
 
   //==================SONGS===========================
-  //TODO need to add filter that selects only user ID songs
+  //gets alls songs - need to update for specific user
   getSongs: function () {
     return axios.get("/api/songs");
   },
@@ -20,6 +20,10 @@ export default {
   saveSong: function (songData) {
     return axios.post("/api/songs", songData);
   },
+
+
+//TODO need to add functions that pull songs per user
+//TODO need functions that pull all child songs for a song parent
 
 
   //===================USER===========================
