@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-function Login() {
+function Home() {
     return (
         <div>
             <div class="container">
@@ -8,7 +8,7 @@ function Login() {
                 <div class="jumbotron text-center">
                     <h1 class="display-4">Tune Chainz</h1>
                     <p class="lead">Our application allows user to share and collaborate music projects,
-                    edit them on  their local computer, upload the remixed file back to the project file.</p>
+                    edit them on  their local computer, upload the remixed file back to the project file</p>
 
                     <br/>
                     <form>
@@ -28,4 +28,4 @@ function Login() {
     )
 }
 
-export default Login; 
+export default Home; 
