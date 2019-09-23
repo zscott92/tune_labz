@@ -27,6 +27,13 @@ module.exports = function (sequelize, DataTypes) {
             validate: {
                 len: [1]
             }
+        },
+        dateJoined: {
+            type: DataTypes.DATEONLY,
+            allowNull: false,
+            validate: {
+                len: [1]
+            }
         }
     });
 

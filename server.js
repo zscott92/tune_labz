@@ -18,6 +18,14 @@ app.use(express.json());
 if (process.env.NODE_ENV === "production") {
     app.use(express.static(path.join(__dirname, "./client/build")));
 }
+var SpotifyWebApi = require('spotify-web-api-node');
+
+var redirectUri = 'localhost:3001';
+var scopes = ['user-top-read'];
+var showDialog = true;
+
+
+
 
 // Add routes, both API
 app.use(routes);

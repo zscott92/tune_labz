@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const jQuery = require("jquery");
 
 // const bookRoutes = require("./books");
 
@@ -6,9 +7,11 @@ const router = require("express").Router();
 // router.use("/books", bookRoutes);
 
 const songRoutes = require("./songs");
+// const fileRoutes = require("../filesAPI/normalizeFileData");
 
 // Song routes
-router.use("/songs", songRoutes);
+router.use("./songs", songRoutes);
+// router.use("./apifiles", fileRoutes);
 
 
 module.exports = router;

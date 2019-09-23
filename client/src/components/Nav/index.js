@@ -4,11 +4,14 @@ function Nav() {
     return (
       <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
         <a className="navbar-brand" href="/">
-          Nav Link Placeholder
+          <a href="../SongFeed">Song Feed</a>
+          <a href="../AudioEditor">Editor</a>
+          <a href="../Dashboard">Dashboard</a>
+          <a href="../Profile">Profile</a>
         </a>
       </nav>
     );
-  }
+};
+export default Nav;
   
-  export default Nav;
   
