@@ -6,7 +6,7 @@ import { Switch } from "react-router-dom";
 // import Search from "./pages/Search";
 // import Splash from "./pages/Splash";
 import Nav from "./components/Nav/index";
-import Community from "./pages/Community";
+// import Community from "./pages/Community";
 // import AudioEditor from ".pages/AudioEditor"
 
 function App() {
@@ -18,7 +18,7 @@ function App() {
                     <Route />
                     {/* <Login /> */}
                     {/* <Profile /> */}
-                    <Community />
+                    {/* <Community /> */}
                     {/* <AudioEditor /> */}
                     <Route />
                 </Switch>

@@ -38,6 +38,7 @@
     "mysql2": "^1.7.0",
     "r-audio": "^1.2.0",
     "rc-tree": "^3.0.0-alpha.34",
+    "react-simple-tree-menu": "^1.1.5",
     "sequelize": "^5.19.0",
     "spotify-web-api-node": "^4.0.0",
     "the-wav": "^1.0.2"
