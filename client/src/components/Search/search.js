@@ -1,7 +1,6 @@
-import Spotify from 'spotify-web-api-js';
-const spotifyApi = new Spotify();
+import React, { Component } from "react";
 
-class SpotifySearch extends React.Component {
+class Search extends Component {
     constructor(props) {
       super(props);
       this.state = {value: ''};
@@ -16,13 +15,6 @@ class SpotifySearch extends React.Component {
       dispatch(setTokens({accessToken, refreshToken}));
       dispatch(getMyInfo());
     }
-
-spotifyApi.getAudioAnalysisForTrack('')
-  .then(function(data) {
-    console.log(data.body);
-  }, function(err) {
-    done(err);
-  });
 
     handleChange(event) {
       this.setState({value: event.target.value});
@@ -44,3 +36,5 @@ spotifyApi.getAudioAnalysisForTrack('')
       );
     }
   }
+
+  export default Search;
