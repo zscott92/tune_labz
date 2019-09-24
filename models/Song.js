@@ -45,8 +45,20 @@ module.exports = function (sequelize, DataTypes) {
                 set: function (artists) {
                     return this.setDataValue('collaborators', JSON.stringify(artists));
                 }
+            },
+            song_id: {
+                type: DataTypes.INTEGER
             }
-        });
+        }); 
+
+        //TODO need to make sure how this references songs to songs and create post request
+        Song.associate = function(models) {
+            models.Song.hasMany(models.Song, {
+              onDelete: 'CASCADE',
+              foreignKey: 'song_id',
+              as: 'children'
+            });
+          };
 
         Song.associate = function (models) {
             Song.belongsTo(models.User, {
