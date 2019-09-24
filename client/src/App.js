@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
 import Search from "./pages/Search";
-import Dashboard from "./pages/Dashboard";
+// import Dashboard from "./pages/Dashboard";
 import Nav from "../src/components/DomComponents/Nav";
 import Wrapper from "../src/components/DomComponents/Wrapper";
 
@@ -17,7 +17,7 @@ function App() {
             <Wrapper>
                 <Route exact path="/" component={Login} />
                 <Route exact path="/profile" component={Profile} />
-                <Route exact path="/dashboard" component={Dashboard} />
+                {/* <Route exact path="/dashboard" component={Dashboard} /> */}
                 <Route exact path="/search" component={Search} />
             </Wrapper>
         </div>
