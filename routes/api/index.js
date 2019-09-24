@@ -1,6 +1,4 @@
 const router = require("express").Router();
-const jQuery = require("jquery");
-
 // const bookRoutes = require("./books");
 
 // Book routes
