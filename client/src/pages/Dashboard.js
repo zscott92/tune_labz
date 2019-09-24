@@ -7,7 +7,7 @@ function Dashboard() {
   return (
 
     <div>
-      <div className="Dashboard">
+      <div className="Dashboard text-center">
         <div className="row">
           <div className="col-4 sidebar">
             <Tree />
