@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import Upload from '../../AudioComponents/UploadFIle'
+import Upload from '../../AudioComponents/FileUploads'
 
 class Upload extends Component {
     Upload = () => {

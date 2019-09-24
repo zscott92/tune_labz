@@ -1,33 +1,25 @@
 import React, { Component } from "react";
-import "../../../../routes/fileTransferAPI/fileUploadApi";
-import { audioElement, audioCtx } from "../UploadFIle"
+import {handleChange } from "./FileUploads";
+const { ReactHowler } = require('react-howler');
 
 class PlayMusic extends Component {
-    function() {
-        const powerButton = document.querySelector('.control-power');
-        playButton.addEventListener('click', function () {
-
-            if (this.dataset.playing === 'false') {
-                audioElement.play();
-                this.dataset.playing = 'true';
-            } else if (this.dataset.playing === 'true') {
-                audioElement.pause();
-                this.dataset.playing = 'false';
+        getDuration() {
+            this.player.duration()
+          }
+          getSeek() {
+            this.player.seek()
+          }
+                 
+          setSeek() {
+            this.player.seek(0.5)
+          }
+            render() {
+            <ReactHowler
+            src= {[handleChange]}
+                  playing={true}
+          format={'mp3', 'wav'}
+          ref={(ref) => (this.player = ref)}
+          />
             }
-            
-            powerButton.addEventListener('click', function () {
-                if (this.dataset.power === 'on') {
-                    audioCtx.suspend();
-                    this.dataset.power = 'off';
-                } else if (this.dataset.power === 'off') {
-                    audioCtx.resume();
-                    this.dataset.power = 'on';
-                }
-                this.setAttribute("aria-checked", state ? "false" : "true");
-                console.log(audioCtx.state);
-            }, false);
-
-        });
-    }
 }
 export default PlayMusic;
