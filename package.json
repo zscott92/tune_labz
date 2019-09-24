@@ -39,6 +39,8 @@
     "lodash": "^4.17.15",
     "music-metadata": "^4.6.0",
     "mysql2": "^1.7.0",
+    "passport": "^0.4.0",
+    "passport-google-token": "^0.1.2",
     "r-audio": "^1.2.0",
     "rc-tree": "^3.0.0-alpha.34",
     "react-google-login": "^5.0.5",
