@@ -1,12 +1,11 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { Switch } from "react-router-dom";
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
 import Search from "./pages/Search";
 import Dashboard from "./pages/Dashboard";
-import Nav from "./components/Nav";
-import Wrapper from "./components/Wrapper";
+import Nav from "../src/components/DomComponents/Nav";
+import Wrapper from "../src/components/DomComponents/Wrapper";
 
 // import Community from "./pages/Community";
 // import AudioEditor from ".pages/AudioEditor"

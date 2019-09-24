@@ -28,4 +28,5 @@ const songSeed = [
     song_name: "Song 4",
     song_desc: "Song description",
     song_pic_url:""
-  },
+  }
+]

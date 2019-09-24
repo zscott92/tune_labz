@@ -1,7 +1,7 @@
 /* freesound API documentation, slightly modified...
 all credit goes to the talented artists that produced and created their artists*/
 var http = require("https");
-const search = require("../../client/public/src/components/Search");
+const searchInput = require("../../client/public/src/components/Search");
 console.log(search);
 
 
@@ -21,9 +21,9 @@ module.exports = function getSamples() {
         };
         return options;
     }
-    let search = "drums";
+    let search = searchInput.exports;
     let songID = "/apiv2/search/text/?query=" + search;
-    let query = getSong(songID);
+    let song = getSong(songID)
     let query = "/apiv2/sounds/" + songID;
 
 

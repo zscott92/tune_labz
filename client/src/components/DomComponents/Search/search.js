@@ -1,7 +1,6 @@
-import React, { Compontent } from react;
-require("dotenv")
+import React, { Component } from react;
 
-module.exports = class Search extends React.Component {
+class Search extends Component {
 
   constructor(props) {
       
@@ -13,12 +12,7 @@ module.exports = class Search extends React.Component {
     }
 
   componentDidMount() {
-    const accessToken = "process_env" + soundSource.toUpperCase() + "_ACCESS_TOKEN";
-    const refreshToken = "process_env" + soundSource.toUpperCase() + "_REFRESH_TOKEN";
-      const {dispatch, params} = this.props;
-      const {accessToken, refreshToken} = params;
-      dispatch(setTokens({accessToken, refreshToken}));
-      dispatch(getMyInfo());
+    console.log("successfully mounted")
     }
 
     handleChange(event) {
@@ -40,4 +34,5 @@ module.exports = class Search extends React.Component {
         </form>
       );
     }
-  }
+}
+export default Search;
