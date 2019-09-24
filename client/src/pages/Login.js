@@ -10,7 +10,6 @@ function Login() {
                     <h1 class="display-4">Tune Chainz</h1>
                     <p class="lead">Our application allows user to share and collaborate music projects,
                     edit them on  their local computer, upload the remixed file back to the project file.</p>
-
                     <br/>
                     <form>
                         Username:<br />
@@ -21,7 +20,8 @@ function Login() {
                         <br/>
                         <button>Sign Up</button><br/>
                         <button>Log In</button><br/>
-                        <button>Sign In With Google</button>
+                    <button>Sign In With Google</button>
+                    <div class="sampleDiv"><label for="file">Upload Sample +</label><input type="file" id="file" name="file" ></input></div>
                     </form>
                 </div>
             </div>

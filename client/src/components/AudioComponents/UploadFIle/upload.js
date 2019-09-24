@@ -1,3 +1,6 @@
+import {Login} from "../../../pages/Login";
+import react from 'react';
+
 
 function upload() {
     let AudioContext = window.AudioContext || window.webkitAudioContext;
@@ -17,6 +20,8 @@ function upload() {
             volume: 0.5,
         });
     })
+    
     return track;
+}
 }
 export default upload;

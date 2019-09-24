@@ -1,7 +1,7 @@
 
 const router = require("express").Router();
 const Howl = require('howler');
-import Audio, { audioElement } from "../../client/src/components/AudioComponents/UploadFIleFE/Upload"
+import Audio, { audioElement } from "../../client/src/components/AudioComponents/UploadFIle/upload"
 
 module.exports = function playAudioRoute() {
   router.get('/api/uploadAudioFile', function (req, res) {
