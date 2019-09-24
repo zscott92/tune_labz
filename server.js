@@ -25,8 +25,6 @@ var scopes = ['user-top-read'];
 var showDialog = true;
 
 
-
-
 // Add routes, both API
 app.use(routes);
 
