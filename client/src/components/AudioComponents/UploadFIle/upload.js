@@ -1,4 +1,4 @@
-import {Login} from "../../../pages/Login";
+import {Dashboard} from "../../../pages/Dashboard";
 import react from 'react';
 
 
@@ -20,8 +20,6 @@ function upload() {
             volume: 0.5,
         });
     })
-    
-    return track;
 }
 }
 export default upload;

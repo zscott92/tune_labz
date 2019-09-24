@@ -7,22 +7,17 @@ import Search from "./pages/Search";
 import Nav from "../src/components/DomComponents/Nav";
 import Wrapper from "../src/components/DomComponents/Wrapper";
 
-// import Community from "./pages/Community";
-// import AudioEditor from ".pages/AudioEditor"
-
 function App() {
     return (
-        <div>
-            <Nav />
-            <Router>
-            <Wrapper>
-                <Route exact path="/" component={Login} />
-                <Route exact path="/profile" component={Profile} />
-                <Route exact path="/dashboard" component={Dashboard} />
-                <Route exact path="/search" component={Search} />
+        <Router>
+            <div>
+                <Nav />
+                <Wrapper>
+                    <Route exact path="/login" component={Login} />
+                    {/* <Route exact path="/dashboard" component={Dashboard} /> */}
                 </Wrapper>
-                </Router>
-        </div>
+            </div>
+        </Router>
     );
 }
 

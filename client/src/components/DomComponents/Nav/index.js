@@ -2,17 +2,14 @@ import React from "react";
 // import { Link } from "react-router-dom";
 
 function Nav() {
-    return (
-      <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
-        <a className="navbar-brand" href="/">
-          <a href="../SongFeed">Song Feed</a>
-          <a href="../AudioEditor">Editor</a>
-          <a href="../Dashboard">Dashboard</a>
-          <a href="../Profile">Profile</a>
-        </a>
+  return (
+    <div>
+      <nav className="navbar navbar-expand-lg navbar-dark">
+          <a href="../login">Sign Up / Login</a>
+        <a href="../dashboard">Dashboard</a>
       </nav>
-    );
+    </div>
+  );
 };
 export default Nav;
-  
-  
+
