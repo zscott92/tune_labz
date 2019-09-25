@@ -1,7 +1,8 @@
-import {Dashboard} from "../../../pages/Dashboard";
-import React, { Component } from 'react';
 
-class UploadFile extends React.Component {
+import React, { Component } from 'react';
+const axios = require('axios');
+
+class Upload extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -10,15 +11,23 @@ class UploadFile extends React.Component {
     this.handleChange = this.handleChange.bind(this);
   }
                 
-  handleChange = event => {
+  onChangeHandler=event=>{
     this.setState({
       selectedFile: event.target.files[0],
-      loaded: 0
+      loaded: 0,
     })
   }
-  onClickHandler = () => {
+  onClickHandler = (selectedFile) => {
     const data = new FormData()
     data.append('file', this.state.selectedFile)
+    axios({
+    method: 'post',
+    url: 'api/songs/:id',
+    data: [file],
+});
+          .then(res => {
+            console.log("Congrats File Uploaded")
+          })``
   }
 
   render() {
@@ -26,14 +35,14 @@ class UploadFile extends React.Component {
       <Wrapper>
         <label>
           Upload Audio File
-          <input type="file" name="file" onChange={this.handleChange} />
-          <button type="button" class="btn btn-success btn-block" onClick={this.onClickHandler}>Upload</button>
+          <input type="file" name="file" onChange={this.onChangeHandler}/>
+          <button type="button" class="btn btn-success btn-block" onClick={this.onClickHandler}>Submit</button>
         </label>
         <input type="submit" value="Submit" />
         </Wrapper>
         );
   }
 }
-export default UploadFile;
+export default Upload;
 
 

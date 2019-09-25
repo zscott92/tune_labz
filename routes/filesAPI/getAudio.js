@@ -1,13 +1,13 @@
-import React, { Component } from "react";
+import axios from 'axios';
 
-export function retrieveSongs() {
-        this.state = {
-            songData: [],
+      onClickHandler = () => {
+        const data = new FormData()
+        data.append('file', this.state.selectedFile)
+        axios.post("/api/song/:id", data, { 
+            url: data
+        })
+          
+        .then(res => { // then print response status
+            console.log(res.statusText)
+         })
         }
-
-    retrieve = () => {
-        const id = this.param.songData.id;
-        const { data } = await Axios.get(`/api/songs/${id}`)
-        this.setState({ todoItem: data })
-    }
-}

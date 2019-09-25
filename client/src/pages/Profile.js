@@ -27,6 +27,7 @@ class Profile extends Component {
   render() {
     return (
     <Container fluid>
+      <div>Profile Content</div>
       {/* <img>{image}</img>
       <ul>
         <li>{name}</li>

@@ -1,12 +1,5 @@
-
-const router = require("express").Router();
 import axios from 'axios';
+import Upload from '../../client/src/components/AudioComponents/Upload'
+const router = require("express").Router();
 
-axios.post("/api/songs", fileUpload, {
-  songID: [song.id],
-  songSrc: [song.src],
-  length: [song.duration]
-      })
-      .then(res => { // then print response status
-        console.log(res.statusText)
-      })
+
