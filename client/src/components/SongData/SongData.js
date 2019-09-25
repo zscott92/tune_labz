@@ -53,7 +53,7 @@ class SongData extends Component {
                         <Button variant="dark"
                             onClick={this.downloadSong}
                         >Download</Button>
-                        <Button variant="link"
+                        <Button variant="warning"
                             onClick={this.creatorLink}
                         >Creator Home</Button>
                     </ButtonToolbar>
