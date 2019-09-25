@@ -1,34 +1,38 @@
-import React from "react";
+
 import TreeMenu, { ItemComponent } from "react-simple-tree-menu";
 import songData from "./songData.json";
+import React, { Component } from "react";
 
 import "react-simple-tree-menu/dist/main.css";
 
-function Tree() {
-  return (
-    <div className="App">
+class Tree extends Component {
+  state = {}
 
-      
-      <TreeMenu data={songData}>
-        {({ items }) => (
-          <ul>
-            {items.map(props => {
-              console.log(props);
-              return (
-                <ItemComponent
-                  {...props}
-                  label= {`${props.song_name}
-                  description= ${props.song_desc}
-                  image= ${props.song_pic_url}
-                  nodes= ${props.nodes}`}
-                />
-              );
-            })}
-          </ul>
-        )}
-      </TreeMenu>
-    </div>
-  );
+  render() {
+    return (
+      <div className="App">
+
+
+        <TreeMenu data={songData}>
+          {({ items }) => (
+            <ul style={{ listStyleType: "none" }}>
+              {items.map(props => {
+                console.log(props);
+                return (
+                  <ItemComponent
+                    {...props}
+                    label={`${props.song_name} - ${props.song_desc}
+                  [${props.song_genre}]
+                  `}
+                  />
+                );
+              })}
+            </ul>
+          )}
+        </TreeMenu>
+      </div>
+    );
+  }
 }
 
 export default Tree;    

@@ -10,28 +10,26 @@ import SongData from "../components/SongData/SongData";
 
 import API from "../utils/API";
 
-import Tree from "../components/Tree";
-import SongData from "../components/SongData";
 // import TrackVisualizer from "../components/TrackVisualizer";
 
 class Dashboard extends Component {
 
   state = {
-    songs
+    // songs
   };
 
   componentDidMount() {
-    this.loadSongs();
+    // this.loadSongs();
   }
 
 
   //need to pass id from page load after user logs in.
-  loadSongs = id => {
-    API.getUserSongs(id)
-      .then(res =>
-        this.setState({ songs: res.data, song_name: "", song_owner: "", song_desc: "", song_pic_url: "", song_genres: "" }))
-      .catch(err => console.log(err));
-  }
+  // loadSongs = id => {
+  //   API.getUserSongs(id)
+  //     .then(res =>
+  //       this.setState({ songs: res.data, song_name: "", song_owner: "", song_desc: "", song_pic_url: "", song_genres: "" }))
+  //     .catch(err => console.log(err));
+  // }
 
   render() {
 
