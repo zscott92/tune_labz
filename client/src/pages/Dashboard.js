@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import Tree from "../components/Tree/Tree";
 import SongData from "../components/SongData/SongData";
-import songdata from "../components/Tree/songData.json"
+import songdata from "../components/Tree/songData.json";
+const Upload = require("../components/AudioComponents/Upload")
 
 
 //Grid and List html components not yet used====================================================
@@ -16,15 +17,15 @@ import songdata from "../components/Tree/songData.json"
 class Dashboard extends Component {
 
   state = {
-    data: [],
+    // data: [],
     clickedSong: {}
   };
 
-  componentDidMount() {
-    this.setState({
-      data: songdata
-    })
-  }
+  // componentDidMount() {
+  //   this.setState({
+  //     data: songdata
+  //   })
+  // }
 
   handleClick = song => {
     console.log("handle DB: ", song);
@@ -49,24 +50,24 @@ class Dashboard extends Component {
             <div className="col-4 sidebar">
               <Tree
                 onClick={this.handleClick}
-                data={this.state.data} 
-                />
+                data={this.state.data}
+              />
             </div>
             <div className="col-8 songdata">
-              <SongData 
+              <SongData
                 song={this.state.clickedSong}
-              />  
-              {/* how to update song data to only pull song info from song with id passed from state */}
+              />
+              /* how to update song data to only pull song info from song with id passed from state
             </div>
           </div>
         </div>
+        <Upload />
       </div>
 
     )
   }
+}
+export default Dashboard;
 
   //When calling tree , associate with a specific user id! FOR USER SPECIFIC SONGS!!!!!!
 
-}
-
-export default Dashboard;

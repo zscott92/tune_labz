@@ -1,7 +1,7 @@
 //audio adjusters based off of MDN documentation
 
 import React, { Component } from "react";
-const Spotify = require("../components/Spotify");
+const Spotify = require("../../../routes/filesAPI/spotifyAPI");
 
 class AudioEditor extends Component {
     render() {

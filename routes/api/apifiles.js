@@ -2,9 +2,7 @@ const router = require("express").Router();
 const {fileUploads, sampleUploads} = require("../filesAPI/normalizeFileData");
 const songsController = require("../../../controllers/songsController");
 
-router.route("/fileUploads")
-  .get(fileUploads.findAll)
-  .post(songsController.create);
+<Route exact path="/fileUploads/:id" component={EditTodo} />;
 
 
 router
@@ -14,3 +12,4 @@ router
   .delete(songsController.remove);
 
 module.exports = router;
+

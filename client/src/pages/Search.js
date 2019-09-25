@@ -1,6 +1,6 @@
 import React from "react";
 import API from "../utils/API";
-import { Col, Row, Container } from "../components/Grid";
+import { Col, Row, Container } from "../components/DomComponents/Grid";
 
 function Search() {
     return (
@@ -9,5 +9,4 @@ function Search() {
         </div>
     );
 }
-
 export default Search;

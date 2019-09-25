@@ -21,7 +21,7 @@ function Login() {
                         <br/>
                         <button>Sign Up</button><br/>
                         <button>Log In</button><br/>
-                        <button>Sign In With Google</button>
+                    <button>Sign In With Google</button>
                     </form>
                 </div>
             </div>

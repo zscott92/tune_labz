@@ -6,7 +6,7 @@ function Nav() {
     <div>
       <nav className="navbar navbar-expand-lg navbar-dark">
           <a href="../login">Sign Up / Login</a>
-          <a href="../dashboard">Dashboard</a>
+        <a href="../dashboard">Dashboard</a>
       </nav>
     </div>
   );

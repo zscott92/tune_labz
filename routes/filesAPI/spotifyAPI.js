@@ -1,40 +1,62 @@
-const router = require("express").Router();
-const SpotifyWebApi = require("spotify-web-api-node");
-const redirectUri = 'https://accounts.spotify.com/authorize';
+var http = require("https");
+require("dotenv");
+var http = require("https");
 
-let spotifyApi = new SpotifyWebApi({
-  clientId : process.env.SPOTIFY_CLIENT_ID,
-  clientSecret : process.env.SPOTIFY_CLIENT_SECRET,
-  redirectUri : redirectUri
-});
+function SpotifyApi() {
+  var spotifySearch = {
+    "method": "GET",
+    "hostname": "api.spotify.com",
+    "port": null,
+    "path": "/v1/search/?q=" + search + "&type=artist",
+    "headers": {
+      "content-length": "0",
+      "authorization": "Bearer BQBR6wcdCFa2CqemL6GtRC1wI2OYxoQyDYygN4Q5VL7TWemgeSCIk5hWqFMVFFojQ5_-krYtseInyisFwe0NjlM3RUlEi0r57OQdM7_edtYC6dMBfvwakFECeDCNU0cp06qbdbFalnrxHwoOaJfQ"
+    }
+  };
 
-router.get('/login', (_, res) => {
-  const state = generateRandomString(16);
-  res.cookie(STATE_KEY, state);
-  res.redirect(spotifyApi.createAuthorizeURL(scopes, state));
-});
+  let data = "";
+  var req = http.request(spotifySearch, function (res) {
+    var chunks = [];
 
-router.get('/callback', (req, res) => {
-  const { code } = req.query;
-  spotifyApi.authorizationCodeGrant(code).then(data => {
-    const { expires_in, access_token, refresh_token } = data.body;
-    spotifyApi.setAccessToken(access_token);
-    spotifyApi.setRefreshToken(refresh_token);
-    res.redirect(`/#/user/${access_token}/${refresh_token}`);
-  }).catch(err => {
-    res.redirect('/#/error/invalid token');
+    res.on("data", function (chunk) {
+      chunks.push(chunk);
+    });
+
+    res.on("end", function () {
+      var body = Buffer.concat(chunks);
+      data = body.toJSONString();
+    });
   });
-});
+  req.end();
 
-router.get('/callback', (req, res) => {
-  const { code, state } = req.query;
-  const storedState = req.cookies ? req.cookies[STATE_KEY] : null;
-  if (state === null || state !== storedState) {
-    res.redirect('/#/error/state mismatch');
-  } else {
-    const { expires_in, access_token, refresh_token } = data.body;
-    spotifyApi.setAccessToken(access_token);
-    spotifyApi.setRefreshToken(refresh_token);
-    res.redirect(`/#/user/${access_token}/${refresh_token}`)
-  }
-});
+  var trackRecording = jsonPath(data, "$..href").toJSONString();
+  var id = jsonPath(artists, "$...id").toJSONString();
+
+
+  var options = {
+    "method": "GET",
+    "hostname": "api.spotify.com",
+    "port": null,
+    "path": "/v1/audio-analysis/" + id,
+    "headers": {
+      "content-length": "0",
+      "authorization": "Bearer BQBgzCpF8IYBMACuOHCNci12u6xs_0lccAQltHLcloYJ3S9lG7Nl7ksVGBP2-3lKJjve_huJ8sb5PcPmmVP5CiytT4dYCoPwSlao7mP-tMre1SarN6SlDl1bqOvib83JEEihmvYx0yArziv74Up9"
+    }
+  };
+
+  var req = http.request(options, function (res) {
+    var chunks = [];
+
+    res.on("data", function (chunk) {
+      chunks.push(chunk);
+    });
+
+    res.on("end", function () {
+      var body = Buffer.concat(chunks);
+      console.log(body.toString());
+    });
+  });
+
+  req.end();
+}
+export default SpotifyApi;
