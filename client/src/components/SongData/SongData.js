@@ -12,7 +12,7 @@ class SongData extends Component {
   }
 
     componentDidUpdate() {
-        console.log('props', this.props);
+        console.log('props', this.props.song);
     }
 
     handleSongRemix = () => {
@@ -35,9 +35,9 @@ class SongData extends Component {
         return (
             <div>
                 <div className="songinformation">
-                    <h1>Track Name</h1>
-                    <h2>Artist</h2>
-                    <h2>Song Here</h2>
+                    <h1>{this.props.song.song_name}</h1>
+                    <h2>Original Artist: {this.props.song.song_creator}</h2>
+                    <h2>{this.props.song.song_desc}</h2>
                     {/* <img src="../../img/waveimg.jpg"></img> */}
                 </div>
                 <div className="button-toolbar">

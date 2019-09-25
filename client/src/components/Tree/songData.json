@@ -6,6 +6,8 @@
       "song_pic_url": "https://picsum.photos/536/354",
       "song_genre": "rock",
       "song_id":"1",
+      "song_creator":"creator",
+      "song_owner": "me",
       "nodes": [
         {
           "key": "dont-stop-believing-leve-2-1",
@@ -14,6 +16,8 @@
           "song_pic_url": "",
           "song_genre": "techno, rock, pop",
           "song_id":"2",
+          "song_creator":"creator",
+          "song_owner": "me",
           "nodes": [
             {
               "key": "dont-stop-believing-leve-2-2",
@@ -21,7 +25,9 @@
               "song_desc": "Jazz Remix of Techno Song",
               "song_pic_url": "",
               "song_genre": "jazz",
-              "song_id":"3"
+              "song_id":"3",
+              "song_creator":"creator",
+              "song_owner": "me"
             }
           ]
         },
@@ -32,6 +38,8 @@
           "song_pic_url": "",
           "song_genre": "psytrance",
           "song_id":"4",
+          "song_creator":"creator",
+          "song_owner": "me",
           "nodes": [
             {
               "key": 21,
@@ -40,6 +48,8 @@
               "song_pic_url": "",
               "song_genre": "rap",
               "song_id":"5",
+              "song_creator":"creator",
+              "song_owner": "me",
               "nodes": [
                 {
                   "key": 22,
@@ -47,7 +57,9 @@
                   "song_desc": "Jazz Remix of Hip Hop",
                   "song_pic_url": "",
                   "song_genre": "jazz, rap",
-                  "song_id":"6"
+                  "song_id":"6",
+                  "song_creator":"creator",
+                  "song_owner": "me"
                 }
               ]
             }
@@ -59,7 +71,9 @@
           "song_desc": "Song description",
           "song_pic_url": "",
           "song_genre": "pop",
-          "song_id":"7"
+          "song_id":"7",
+          "song_creator":"creator",
+          "song_owner": "me"
         },
         {
           "key": 4,
@@ -67,7 +81,9 @@
           "song_desc": "Song description",
           "song_pic_url": "",
           "song_genre": "R&B",
-          "song_id":"8"
+          "song_id":"8",
+          "song_creator":"creator",
+          "song_owner": "me"
         },
         {
           "key": 5,
@@ -75,7 +91,9 @@
           "song_desc": "Song description",
           "song_pic_url": "",
           "song_genre": "rock",
-          "song_id":"9"
+          "song_id":"9",
+          "song_creator":"creator",
+          "song_owner": "me"
         }
       ]
     },
@@ -86,6 +104,8 @@
       "song_pic_url": "",
       "song_genre": "pop",
       "song_id":"10",
+      "song_creator":"creator",
+      "song_owner": "me",
       "nodes": [
         {
           "key": 61,
@@ -94,6 +114,8 @@
           "song_pic_url": "",
           "song_genre": "R&B",
           "song_id":"11",
+          "song_creator":"creator",
+          "song_owner": "me",
           "nodes": [
             {
               "key": 62,
@@ -101,7 +123,9 @@
               "song_desc": "Song child to 6 to 61",
               "song_pic_url": "",
               "song_genre": "rap",
-              "song_id":"12"
+              "song_id":"12",
+              "song_creator":"creator",
+              "song_owner": "me"
             }
           ]
         },
@@ -111,7 +135,9 @@
           "song_desc": "Song description",
           "song_pic_url": "",
           "song_genre": "country",
-          "song_id":"13"
+          "song_id":"13",
+          "song_creator":"creator",
+          "song_owner": "me"
         },
         {
           "key": 8,
@@ -120,6 +146,8 @@
           "song_pic_url": "",
           "song_genre": "rap",
           "song_id":"14",
+          "song_creator":"creator",
+          "song_owner": "me",
           "nodes": [
             {
               "key": 81,
@@ -128,6 +156,8 @@
               "song_pic_url": "",
               "song_genre": "pop",
               "song_id":"15",
+              "song_creator":"creator",
+              "song_owner": "me",
               "nodes": [
                 {
                   "key": 82,
@@ -135,7 +165,9 @@
                   "song_desc": "Song child to 8 to 81",
                   "song_pic_url": "",
                   "song_genre": "pop",
-                  "song_id":"16"
+                  "song_id":"16",
+                  "song_creator":"creator",
+                  "song_owner": "me"
                 }
               ]
             }
@@ -147,7 +179,9 @@
           "song_desc": "Song description",
           "song_pic_url": "",
           "song_genre": "pop",
-          "song_id":"17"
+          "song_id":"17",
+          "song_creator":"creator",
+          "song_owner": "me"
         },
         {
           "key": 10,
@@ -155,7 +189,9 @@
           "song_desc": "Song description",
           "song_pic_url": "",
           "song_genre": "pop",
-          "song_id":"18"
+          "song_id":"18",
+          "song_creator":"creator",
+          "song_owner": "me"
         }
       ]
     }
