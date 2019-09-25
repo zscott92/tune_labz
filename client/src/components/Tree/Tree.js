@@ -8,6 +8,9 @@ import "react-simple-tree-menu/dist/main.css";
 class Tree extends Component {
   state = {}
 
+  handleSongClick = (e, data) => {
+    console.log("click" + data);
+  }
   render() {
     return (
       <div className="App">
