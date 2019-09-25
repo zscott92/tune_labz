@@ -37,17 +37,26 @@ module.exports = function (sequelize, DataTypes) {
                 type: DataTypes.STRING,
                 allowNull: true
             },
-            collaborators: {
+            song_creator: {
                 type: DataTypes.STRING,
-                get: function () {
-                    return JSON.parse(this.getDataValue(Song.associate.models.User));
-                },
-                set: function (artists) {
-                    return this.setDataValue('collaborators', JSON.stringify(artists));
-                }
+                allowNull: true  
             },
+            parent_id: {
+                type: DataTypes.INTEGER,
+                allowNull: false
+            },
+            // collaborators: {
+            //     type: DataTypes.STRING,
+            //     get: function () {
+            //         return JSON.parse(this.getDataValue(Song.associate.models.User));
+            //     },
+            //     set: function (artists) {
+            //         return this.setDataValue('collaborators', JSON.stringify(artists));
+            //     }
+            // },
             song_id: {
-                type: DataTypes.INTEGER
+                type: DataTypes.INTEGER,
+                allowNull: false
             }
         }); 
 
