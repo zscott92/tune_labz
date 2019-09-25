@@ -39,7 +39,7 @@ module.exports = function (sequelize, DataTypes) {
             },
             song_creator: {
                 type: DataTypes.STRING,
-                allowNull: true  
+                allowNull: true
             },
             parent_id: {
                 type: DataTypes.INTEGER,
@@ -58,16 +58,17 @@ module.exports = function (sequelize, DataTypes) {
                 type: DataTypes.INTEGER,
                 allowNull: false
             }
-        }); 
+        });
 
         //TODO need to make sure how this references songs to songs and create post request
-        Song.associate = function(models) {
-            models.Song.hasMany(models.Song, {
-              onDelete: 'CASCADE',
-              foreignKey: 'song_id',
-              as: 'children'
+        Song.associate = function (models) {
+            models.Song.hasOne(models.Song, {
+                as: 'Parent',
+                foreignKey: 'parent_id',
+                through: null,
+                onDelete: 'CASCADE'
             });
-          };
+        };
 
         Song.associate = function (models) {
             Song.belongsTo(models.User, {
