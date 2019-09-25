@@ -16,6 +16,10 @@ module.exports = {
   },
   sendToken: function(req, res) {
       res.setHeader('x-auth-token', req.token);
-      return res.status(200).send(JSON.stringify(req.user));
+      return res.status(200).json({
+          id: req.user.id,
+          user_email: req.user.user_email,
+          user_name: req.user.user_name
+      });
   }
 };

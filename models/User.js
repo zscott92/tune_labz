@@ -10,32 +10,13 @@ module.exports = function (sequelize, DataTypes) {
         },
         user_email: DataTypes.STRING,
         user_password: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            validate: {
-                len: [1]
-            }
+            type: DataTypes.STRING
         },
         user_tagline: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            validate: {
-                len: [1]
-            }
+            type: DataTypes.STRING
         },
         user_summary: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            validate: {
-                len: [1]
-            }
-        },
-        dateJoined: {
-            type: DataTypes.DATEONLY,
-            allowNull: false,
-            validate: {
-                len: [1]
-            }
+            type: DataTypes.STRING
         },
         googleProviderId: DataTypes.STRING,
         googleProviderToken: DataTypes.STRING
@@ -43,9 +24,11 @@ module.exports = function (sequelize, DataTypes) {
 
     User.upsertGoogleUser = function (accessToken, refreshToken, profile, cb) {
         return this.findOne({
-            'googleProviderId': profile.id
+            where: {
+                'googleProviderId': profile.id
+            }
         }).then((user) => {
-            // no user was found, lets create a new one
+            // no user was found, lets create a ne  w one
             if (!user) {
                 var newUser = new this({
                     user_name: profile.displayName,
@@ -56,10 +39,12 @@ module.exports = function (sequelize, DataTypes) {
 
                 newUser.save()
                     .then(function (savedUser) {
-                        return cb(savedUser);
+                        return cb(null, savedUser);
                     }).catch(function (err) {
                         return console.log(err);
                     });
+            } else {
+                cb(null, user);
             }
         }).catch(function (err) {
             return cb(err);

@@ -1,6 +1,9 @@
 require("dotenv").config();
 const express = require("express");
+const cookieParser = require('cookie-parser');
+const cors = require('cors');
 const routes = require("./routes");
+
 
 const PORT = process.env.PORT || 3001;
 
@@ -9,8 +12,17 @@ const app = express();
 // Requiring our models for syncing
 var db = require("./models");
 
+const corsOption = {
+    origin: true,
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true,
+    exposedHeaders: ['x-auth-token']
+};
+app.use(cors(corsOption));
+
 // Define middleware here
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 app.use(express.json());
 
 
