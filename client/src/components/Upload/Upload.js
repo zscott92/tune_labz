@@ -1,7 +1,5 @@
-
-import React, { Component } from 'react';
-const axios = require('axios');
-
+import Wrapper from '../../DomComponents/Wrapper'
+const React, {Component} = require('react');
 class Upload extends React.Component {
   constructor(props) {
     super(props);
@@ -11,23 +9,15 @@ class Upload extends React.Component {
     this.handleChange = this.handleChange.bind(this);
   }
                 
-  onChangeHandler=event=>{
+  handleChange = event => {
     this.setState({
       selectedFile: event.target.files[0],
-      loaded: 0,
+      loaded: 0
     })
   }
-  onClickHandler = (selectedFile) => {
+  onClickHandler = () => {
     const data = new FormData()
     data.append('file', this.state.selectedFile)
-    axios({
-    method: 'post',
-    url: 'api/songs/:id',
-    data: [file],
-});
-          .then(res => {
-            console.log("Congrats File Uploaded")
-          })``
   }
 
   render() {
@@ -35,8 +25,8 @@ class Upload extends React.Component {
       <Wrapper>
         <label>
           Upload Audio File
-          <input type="file" name="file" onChange={this.onChangeHandler}/>
-          <button type="button" class="btn btn-success btn-block" onClick={this.onClickHandler}>Submit</button>
+          <input type="file" name="file" onChange={this.handleChange} />
+          <button type="button" class="btn btn-success btn-block" onClick={this.onClickHandler}>Upload</button>
         </label>
         <input type="submit" value="Submit" />
         </Wrapper>

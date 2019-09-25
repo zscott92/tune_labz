@@ -1,9 +1,9 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Login from "./pages/Login";
+import Login from "../pages/Login";
 import Dashboard from "./pages/Dashboard";
-import Nav from "../src/components/DomComponents/Nav";
-import Wrapper from "../src/components/DomComponents/Wrapper";
+import Nav from "./components/DomComponents/Nav";
+import Wrapper from "./components/DomComponents/Wrapper";
 
 function App() {
     return (

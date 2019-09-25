@@ -1,9 +1,25 @@
 import React, { Component } from "react";
 import Tree from "../components/Tree/Tree";
-import SongData from "../components/SongData/SongData";
+import SongData from "../components/Data/SongData";
 import songdata from "../components/Tree/songData.json";
-const Upload = require("../components/AudioComponents/Upload")
+import Upload from "../components/AudioComponents/Upload";
 
+
+//Grid and List html components not yet used====================================================
+// import { Col, Row, Container } from "../components/Grid";
+// import { List, ListItem } from "../components/List";
+// import Jumbotron from "../components/Jumbotron";
+//==============================================================================================
+
+
+// import TrackVisualizer from "../components/TrackVisualizer";
+
+
+  // componentDidMount() {
+  //   this.setState({
+  //     data: songdata
+  //   })
+  // }
 
 //Grid and List html components not yet used====================================================
 // import { Col, Row, Container } from "../components/Grid";
@@ -56,17 +72,22 @@ class Dashboard extends Component {
             <div className="col-8 songdata">
               <SongData
                 song={this.state.clickedSong}
-              />
-              /* how to update song data to only pull song info from song with id passed from state
+              /> 
             </div>
           </div>
         </div>
         <Upload />
-      </div>
+      </div> 
 
     )
   }
 }
+
+
+
+
+  //When calling tree , associate with a specific user id! FOR USER SPECIFIC SONGS!!!!!!
+
 export default Dashboard;
 
   //When calling tree , associate with a specific user id! FOR USER SPECIFIC SONGS!!!!!!
