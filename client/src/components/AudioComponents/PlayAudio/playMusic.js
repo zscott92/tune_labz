@@ -1,7 +1,6 @@
-import React, { Component } from "react";
-import {handleChange } from "./FileUploads";
-const { ReactHowler } = require('react-howler');
-
+import {onChange}from '../FileUploads/upload';
+const { Component } = require("react");
+const ReactHowler = require('react-howler');
 class PlayMusic extends Component {
         getDuration() {
             this.player.duration()
@@ -10,16 +9,18 @@ class PlayMusic extends Component {
             this.player.seek()
           }
                  
-          setSeek() {
-            this.player.seek(0.5)
+  setSeek() {
+    this.player.seek(0.5)
+  }
+          render () {
+            return(
+              <ReactHowler
+                src= {[onChange]}
+                playing={true}
+                ref={(ref) => (this.player = ref)}
+              />
+            );
           }
-            render() {
-            <ReactHowler
-            src= {[handleChange]}
-                  playing={true}
-          format={'mp3', 'wav'}
-          ref={(ref) => (this.player = ref)}
-          />
-            }
-}
+        }
+
 export default PlayMusic;

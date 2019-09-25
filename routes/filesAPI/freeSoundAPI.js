@@ -25,50 +25,50 @@
 //         }
 //     }
 
-    // song = getSong(songID)
+//     song = getSong(songID)
 
 
-    // var req = http.request(options, function (res) {
-    //         var chunks = [];
+//     var req = http.request(options, function (res) {
+//             var chunks = [];
 
-    //         res.on("data", function (chunk) {
-    //             chunks.push(chunk);
-    //         });
+//             res.on("data", function (chunk) {
+//                 chunks.push(chunk);
+//             });
 
-    //         res.on("end", function () {
-    //             var body = Buffer.concat(chunks);
-    //             console.log(body.toString());
-    //         });
-    //     });
-    //     var http = require("https");
-    //     function analysis() {
-    //         var analysis = {
-    //             "method": "GET",
-    //             "hostname": "freesound.org",
-    //             "port": null,
-    //             "path": query,
-    //             "headers": {
-    //                 "cookie": "csrftoken=9TEHZyFMVUxu7RHe3iz5QqO55lWeAwZWpvEkPPzN2ntEowSKj5GyTt7Zuorrpgu5",
-    //                 "content-length": "0",
-    //                 "authorization": "Bearer KvwVi6Nb5DjGBJOSxVOHh6fcI9yws0"
-    //             }
-    //         };
-    //         return analysis;
-    //     }
-    //     let query = "/apiv2/sounds/" + jsonPath(song, "$..id").toJSONString();
-    //     let analysis = analysis(query);
-    //     var req = http.request(analysis, function (res) {
-    //         var chunks = [];
+//             res.on("end", function () {
+//                 var body = Buffer.concat(chunks);
+//                 console.log(body.toString());
+//             });
+//         });
+//         var http = require("https");
+//         function analysis() {
+//             var analysis = {
+//                 "method": "GET",
+//                 "hostname": "freesound.org",
+//                 "port": null,
+//                 "path": query,
+//                 "headers": {
+//                     "cookie": "csrftoken=9TEHZyFMVUxu7RHe3iz5QqO55lWeAwZWpvEkPPzN2ntEowSKj5GyTt7Zuorrpgu5",
+//                     "content-length": "0",
+//                     "authorization": "Bearer KvwVi6Nb5DjGBJOSxVOHh6fcI9yws0"
+//                 }
+//             };
+//             return analysis;
+//         }
+//         let query = "/apiv2/sounds/" + jsonPath(song, "$..id").toJSONString();
+//         let analysis = analysis(query);
+//         var req = http.request(analysis, function (res) {
+//             var chunks = [];
 
-    //         res.on("data", function (chunk) {
-    //             chunks.push(chunk);
-    //         });
+//             res.on("data", function (chunk) {
+//                 chunks.push(chunk);
+//             });
 
-    //         res.on("end", function () {
-    //             var body = Buffer.concat(chunks);
-    //             console.log(body.toString());
-    //         });
-    //     });
+//             res.on("end", function () {
+//                 var body = Buffer.concat(chunks);
+//                 console.log(body.toString());
+//             });
+//         });
 
-    //     req.end();
-    // }
+//         req.end();
+//     }
