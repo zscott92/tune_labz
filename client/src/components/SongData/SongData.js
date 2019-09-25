@@ -38,7 +38,7 @@ class SongData extends Component {
                     <h1>{this.props.song.song_name}</h1>
                     <h2>Original Artist: {this.props.song.song_creator}</h2>
                     <h2>{this.props.song.song_desc}</h2>
-                    {/* <img src="../../img/waveimg.jpg"></img> */}
+                    <img src={this.props.song.song_pic_url} alt="missing img"></img>
                 </div>
                 <div className="button-toolbar">
                     <ButtonToolbar>
