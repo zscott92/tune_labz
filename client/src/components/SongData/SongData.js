@@ -5,7 +5,15 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 class SongData extends Component {
-    state = {};
+    constructor(props) {
+    super(props);
+    // Don't call this.setState() here!
+    // this.state = {}
+  }
+
+    componentDidUpdate() {
+        console.log('props', this.props.song);
+    }
 
     handleSongRemix = () => {
         console.log("remix");
@@ -27,10 +35,10 @@ class SongData extends Component {
         return (
             <div>
                 <div className="songinformation">
-                    <h1>Track Name</h1>
-                    <h2>Artist</h2>
-                    <h2>Song Here</h2>
-                    {/* <img src="../../img/waveimg.jpg"></img> */}
+                    <h1>{this.props.song.song_name}</h1>
+                    <h2>Original Artist: {this.props.song.song_creator}</h2>
+                    <h2>{this.props.song.song_desc}</h2>
+                    <img src={this.props.song.song_pic_url} alt="missing img"></img>
                 </div>
                 <div className="button-toolbar">
                     <ButtonToolbar>
