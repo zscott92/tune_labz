@@ -1,4 +1,4 @@
-import React from "./node_modules/react";
+import React from "react";
 
 export function UserName(props) {
     return (
@@ -24,6 +24,13 @@ export function UserSummary(props) {
     );
 }
 
+export function FormBtn(props) {
+    return (
+        <button {...props} style={{ float: "right", marginBottom: 10 }} className="btn btn-success">
+            {props.children}
+        </button>
+    );
+}
 export function FormBtn(props) {
     return (
         <button {...props} style={{ float: "right", marginBottom: 10 }} className="btn btn-success">

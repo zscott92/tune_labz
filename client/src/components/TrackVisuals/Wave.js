@@ -1,4 +1,4 @@
-import { mp3Converter } from "../../../../../routes/filesAPI/mp3-to-WAV"
+import { mp3Converter } from "../../../../routes/filesAPI/mp3-to-WAV"
 
 export function Wave() {
     waves = () =>

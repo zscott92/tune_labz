@@ -1,5 +1,7 @@
-import Wrapper from '../../DomComponents/Wrapper'
-const React, {Component} = require('react');
+
+import React from 'react';
+import Wrapper from '../Wrapper';
+
 class Upload extends React.Component {
   constructor(props) {
     super(props);

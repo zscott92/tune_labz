@@ -1,9 +1,7 @@
-import React, { Component } from react;
+import React, { Component } from "react";
 
 class Search extends Component {
-
-  constructor(props) {
-      
+    constructor(props) {
       super(props);
       this.state = {value: ''};
   
@@ -11,8 +9,11 @@ class Search extends Component {
       this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-  componentDidMount() {
-    console.log("successfully mounted")
+    componentDidMount() { 
+      const {dispatch, params} = this.props;
+      const {accessToken, refreshToken} = params;
+      dispatch(setTokens({accessToken, refreshToken}));
+      dispatch(getMyInfo());
     }
 
     handleChange(event) {
@@ -27,12 +28,13 @@ class Search extends Component {
       return (
         <form onSubmit={this.handleSubmit}>
           <label>
-            Search track:
+            Choose track:
             <input type="text" value={this.state.value} onChange={this.handleChange} />
           </label>
           <input type="submit" value="Submit" />
         </form>
       );
     }
-}
-export default Search;
+  }
+
+  export default Search;

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Col, Row, Container } from "../components/DomComponents/Grid";
+import { Col, Row, Container } from "../components/Grid";
 import API from "../utils/API";
 import { Link } from "react-router-dom";
 
