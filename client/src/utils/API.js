@@ -6,13 +6,18 @@ import { GoogleLogin } from 'react-google-login';
 export default {
 
   //==================SONGS===========================
-  //TODO need to add filter that selects only user ID songs
+  //gets alls songs
   getSongs: function () {
     return axios.get("/api/songs");
   },
-  //gets song with given id
-  getSong: function (id) {
-    return axios.get("/api/songs/" + id);
+  //gets song with given user id
+  getUserSongs: function (id) {
+    return axios.get(`api/user/${id}/songs`);
+  },
+
+  //gets child songs of a song by song id
+  getSongChildren: function(id) {
+    return axios.get("/api/songs/children/" + id) //TODO need to understand how to pull children
   },
   // Deletes the song with the given id
   deleteSong: function (id) {
@@ -22,6 +27,8 @@ export default {
   saveSong: function (songData) {
     return axios.post("/api/songs", songData);
   },
+
+//TODO need functions that post songs both parent and child.  How to distinguish between the two??
 
 
   //===================USER===========================

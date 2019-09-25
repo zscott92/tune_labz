@@ -1,11 +1,14 @@
 const router = require("express").Router();
 const songsController = require("../../controllers/songsController");
 
+//matches with api/user/:userid/song t
 router.route("/")
   .get(songsController.findAll)
   .post(songsController.create);
 
 
+  
+//matches with api/songs/:id
 router
   .route("/:id")
   .get(songsController.findById)

@@ -4,6 +4,7 @@ import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import Nav from "./components/Nav";
 import Wrapper from "./components/Wrapper";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
     return (
@@ -18,5 +19,5 @@ function App() {
         </Router>
     );
 }
-
+    
 export default App;

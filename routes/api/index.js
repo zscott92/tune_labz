@@ -1,17 +1,15 @@
 const router = require("express").Router();
-const jQuery = require("jquery");
-
-// const bookRoutes = require("./books");
-
-// Book routes
-// router.use("/books", bookRoutes);
-
+<<<<<<< HEAD
 const songRoutes = require("./songs");
+const userRoutes = require("./user")
+=======
+// const bookRoutes = require("./books");
+>>>>>>> 14de227b8b27c997b6719e506f0ce1ac2b1ef41f
+
+router.use("/songs", songRoutes);
+router.use("/user". userRoutes);
+
 // const fileRoutes = require("../filesAPI/normalizeFileData");
-
-// Song routes
-router.use("./songs", songRoutes);
 // router.use("./apifiles", fileRoutes);
-
 
 module.exports = router;
