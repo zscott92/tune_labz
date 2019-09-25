@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import Button from 'react-bootstrap/Button'
 import ButtonToolbar from 'react-bootstrap/ButtonToolbar'
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 class SongData extends Component {
