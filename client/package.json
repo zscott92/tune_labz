@@ -5,6 +5,7 @@
   "proxy": "http://localhost:3001/",
   "dependencies": {
     "axios": "^0.19.0",
+<<<<<<< HEAD
     "express": "^4.17.1",
     "mysql": "^2.17.1",
     "r-audio": "^1.2.0",
@@ -13,6 +14,14 @@
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.1.1",
     "react-simple-tree-menu": "^1.1.5"
+=======
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "react-router-dom": "^5.0.1",
+    "react-simple-tree-menu": "^1.1.5",
+    "react-scripts": "3.1.1",
+    "r-audio": "^1.2.0"
+>>>>>>> 14de227b8b27c997b6719e506f0ce1ac2b1ef41f
   },
   "scripts": {
     "start": "react-scripts start",

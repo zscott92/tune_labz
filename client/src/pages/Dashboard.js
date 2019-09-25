@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import Tree from "../components/Tree/Tree";
+import SongData from "../components/SongData/SongData";
 
 //Grid and List html components not yet used====================================================
 // import { Col, Row, Container } from "../components/Grid";
@@ -29,61 +31,30 @@ class Dashboard extends Component {
       .then(res =>
         this.setState({ songs: res.data, song_name: "", song_owner: "", song_desc: "", song_pic_url: "", song_genres: "" }))
       .catch(err => console.log(err));
-  };
-
-
-
-  // OnLoadFunctions - commented out for now until tree set up for usability===========================================================================
- 
-  // loadChildrenSongs = () => {
-  //   API.getSongChildren(song_id)
-  //     .then(res =>
-  //       this.setState({})) 
-  //     .catch(err => console.log(err));
-  // },
-  //=================================================================================================================================
-  <div>
-    <Dashboard>
-      <div className="sidebar">
-        <p>Dashboard Content</p>
-        <Tree />
-      </div>
-      <div className="song data">
-        <SongData />
-      </div>
-    </Dashboard>
-  </div >
-
-)
-    // return (
-    //   <Container fluid>
-    //     <Row>
-    //       <Col size="md-6">
-    //         <Jumbotron>
-    //           <h1>User Song List</h1>
-    //         </Jumbotron>
-    //         {this.state.songs.length ? (
-    //           <List>
-    //             {this.state.songs.map(song => (
-    //               <ListItem key={song._id}>
-    //                 {/* <Link to={"/songs/" + song._id}>
-    //                   <strong>
-    //                     {song.song_name} by {song.song_desc}
-    //                   </strong>
-    //                   <div>
-    //                     {song.song_visualization}
-    //                   </div>
-    //                 </Link> */}
-    //               </ListItem>
-    //             ))}
-    //           </List>
-    //         ) : (
-    //             <h3>No Songs Available</h3>
-    //           )}
-    //       </Col>
-    //     </Row>
-    //   </Container>
-    // );
   }
+
+  render() {
+
+    return (
+
+      <div>
+        <div className="Dashboard text-center">
+          <div className="row">
+            <div className="col-4 sidebar">
+              <Tree />
+            </div>
+            <div className="col-8 songdata">
+              <SongData />
+            </div>
+          </div>
+        </div>
+      </div>
+
+    )
+  }
+
+  //When calling tree , associate with a specific user id! FOR USER SPECIFIC SONGS!!!!!!
+
+}
 
 export default Dashboard;
