@@ -5,7 +5,15 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 class SongData extends Component {
-    state = {};
+    constructor(props) {
+    super(props);
+    // Don't call this.setState() here!
+    // this.state = {}
+  }
+
+    componentDidUpdate() {
+        console.log('props', this.props);
+    }
 
     handleSongRemix = () => {
         console.log("remix");
