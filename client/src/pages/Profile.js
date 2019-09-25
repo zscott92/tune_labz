@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Col, Row, Container } from "../components/Grid";
 import API from "../utils/API";
 import { Link } from "react-router-dom";
 
@@ -24,14 +25,20 @@ class Profile extends Component {
   };
 
   render() {
+    return (
     <Container fluid>
-      <img>{image}</img>
+      <div>Profile Content</div>
+      {/* <img>{image}</img>
       <ul>
         <li>{name}</li>
         <li>{tagline}</li>
         <li>{summary}</li>
       </ul>
-      <li>{songs}</li>
-    </Container>
+      <li>{songs}</li> */}
+      </Container>
+    )
+
   }
 }
+
+export default Profile;
