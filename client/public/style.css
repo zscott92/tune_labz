@@ -1,6 +1,7 @@
 body {
     font-family: 'Oxygen Mono', sans-serif;
     min-height: 100%;
+    background-color: white;
 }
 html {
     height: 100%;
@@ -15,6 +16,13 @@ form input {
 nav a {
     margin: 10px;
     color: black;
+}
+
+.jumbotron{
+    color: #5271FF;
+    background-color: lightgray;
+    border-radius: 15px;
+    border: 3px solid black;
 }
 
 footer {
@@ -45,20 +53,47 @@ footer {
 
 .musicRow{
     margin-bottom: 50px;
+    margin-top: 50px;
 }
 
 .sidebar{
     border: 3px solid black;
+    border-radius: 15px;
+    padding: 15px;
 }
 .songinformation {
     border: 3px solid black;
     margin-bottom: 10px;
+    border-radius: 15px;
+    padding: 30px;
 }
 .songinformation img {
     width: 75%;
     margin: 15px;
 }
 
+form button {
+    color: #5271FF;
+    border: 1px solid black;
+}
+
+form input {
+    border: 1px solid black;
+}
+
 .btn-toolbar{
     justify-content: center;
+}
+
+.btn-toolbar button{
+    border-radius: 15px;
+    margin: 2px;
+}
+
+.tree-item{
+    border-radius: 15px;
+}
+
+ul {
+    padding-right: 40px;
 }
