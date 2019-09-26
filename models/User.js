@@ -1,40 +1,24 @@
 module.exports = function (sequelize, DataTypes) {
     var User = sequelize.define("User", {
+        id: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },    
         user_name: {
             type: DataTypes.STRING,
-            allowNull: false,
-            validate: {
-                len: [1]
-            }
+            allowNull: false
         },
         user_password: {
             type: DataTypes.STRING,
-            allowNull: false,
-            validate: {
-                len: [1]
-            }
+            allowNull: false
         },
-        user_tagline: {
+        artistname: {
             type: DataTypes.STRING,
-            allowNull: false,
-            validate: {
-                len: [1]
-            }
-        },
-        user_summary: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            validate: {
-                len: [1]
-            }
-        },
-        dateJoined: {
-            type: DataTypes.DATEONLY,
-            allowNull: false,
-            validate: {
-                len: [1]
-            }
+            allowNull: false
         }
+    },
+    {
+        timestamps: true
     });
 
     User.associate = function (models) {
