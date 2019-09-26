@@ -3,43 +3,10 @@ import Button from 'react-bootstrap/Button'
 import ButtonToolbar from 'react-bootstrap/ButtonToolbar'
 import API from "../../utils/API";
 import {Col, Container, Row} from "../Grid"
-import React from 'react';
 import Wrapper from '../Wrapper';
-
-class Upload extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      selectedFile: null
-    }
-    this.handleChange = this.handleChange.bind(this);
-  }
-                
-  handleChange = event => {
-    this.setState({
-      selectedFile: event.target.files[0],
-      loaded: 0
-    })
-  }
-  onClickHandler = () => {
-    const data = new FormData()
-    data.append('file', this.state.selectedFile)
-  }
-
-  render() {
-    return (
-      <Wrapper>
-        <label>
-          Upload Audio File
-          <input type="file" name="file" onChange={this.handleChange} />
-          <button type="button" class="btn btn-success btn-block" onClick={this.onClickHandler}>Upload</button>
-        </label>
-        <input type="submit" value="Submit" />
-        </Wrapper>
-        );
-  }
-}
-export default Upload;
+import Wave from '../WAV/mp3-to-WAV';
+const {Progress} = require('reactstrap');
+const axios = require( 'axios');
 
 class SongData extends Component {
     constructor(props) {
@@ -47,18 +14,44 @@ class SongData extends Component {
     this.state = {
       selectedFile: null
     }
-    this.handleChange = this.handleChange.bind(this);
+    this.onChangeHandler = this.onChangeHandler.bind(this);
   }
-  handleChange = event => {
+  onChangeHandler = event => {
     this.setState({
       selectedFile: event.target.files[0],
       loaded: 0
     })
   }
+
+ maxSelectFile=(event)=>{
+       if (this.state.selectedFile > 1) { 
+          const msg = 'Only 1 images can be uploaded at a time'
+          event.target.value = null 
+          console.log(msg)
+         return false;
+     }
+   return true;
+}
+
+
    onClickHandler = () => {
     const data = new FormData()
+    const mp3 = 'mp3';
+    const wav = 'wav';
+    let allValues = data.values()
+    let extractURL = allValues[0]
+    let domain = extractURL.substring(extractURL - 3);
     data.append('file', this.state.selectedFile)
-  }
+    axios.post("http://localhost:8000/upload", data, {
+       onUploadProgress: ProgressEvent => {
+         this.setState({
+           loaded: (ProgressEvent.loaded / ProgressEvent.total*100),
+       })
+   },
+})
+   }
+
+   
     componentDidUpdate() {
         console.log('props', this.props.song);
     }
@@ -99,11 +92,14 @@ class SongData extends Component {
                         <Button variant="primary"
                             onClick={this.handleSongRemix}
                         >Create Remix</Button>
-                        <input type="file" name="file" onChange={this.handleChange} 
-                        <label>
-                                Upload Audio File
-                            <Button variant="success"  onClick={this.onClickHandler}>Upload</button>
+                        <input type="file" name="file" onChange={this.onChangeHandler}/>
+                        <label htmlFor="contained-button-file">
+                        <button type="button" Button variant="dark" class="btn btn-success btn-block" id="contained-button-file" onClick={this.onClickHandler}>Upload</button>
                         </label>
+                        <input type="submit" value="Submit" />
+                        <div class="form-group">
+                            <Progress max="100" color="success" value={this.state.loaded} >{Math.round(this.state.loaded,2) }%</Progress>
+                            </div>
                         {/* <Button variant="secondary">Secondary</Button>
                         <Button variant="warning">Warning</Button>
                         <Button variant="danger">Danger</Button> */}
@@ -125,3 +121,4 @@ class SongData extends Component {
         );
     }
 }
+export default SongData;
