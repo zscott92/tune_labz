@@ -1,34 +1,41 @@
 import React, { Component } from "react";
 import Button from 'react-bootstrap/Button'
 import ButtonToolbar from 'react-bootstrap/ButtonToolbar'
-
+import API from "../../utils/API";
+import {Col, Container, Row} from "../Grid"
 
 class SongData extends Component {
     constructor(props) {
-    super(props);
-    // Don't call this.setState() here!
-    // this.state = {}
-  }
+        super(props);
+        // Don't call this.setState() here!
+        // this.state = {}
+    }
 
     componentDidUpdate() {
         console.log('props', this.props.song);
     }
 
     handleSongRemix = () => {
-        console.log("remix");
+        console.log("remix", this.props.song.song_id);
     };
 
+    //remix
     handleSongAdd = () => {
-        console.log("add to lib")
+        console.log("add to lib: ", this.props.song)
+        API.saveSong(this.props.song)
     };
 
     downloadSong = () => {
-        console.log("download")
+        console.log("download", this.props.song.song_id)
     };
 
     creatorLink = () => {
         console.log("creator link")
     };
+
+    handleUpload = () => {
+        console.log("upload file")
+    }
 
     render() {
         return (
@@ -44,12 +51,17 @@ class SongData extends Component {
                         <Button variant="primary"
                             onClick={this.handleSongRemix}
                         >Create Remix</Button>
+                        <Button variant="success"
+                            onClick={this.handleUpload}
+                        >
+                            Upload New Song</Button>
                         {/* <Button variant="secondary">Secondary</Button>
-                        <Button variant="success">Copy to m</Button>
                         <Button variant="warning">Warning</Button>
                         <Button variant="danger">Danger</Button> */}
                         <Button variant="info"
-                            onClick={this.handleSongAdd}>Add to my Library</Button>
+                            onClick={this.handleSongAdd}
+                        >
+                            Add to my Library</Button>
                         <Button variant="dark"
                             onClick={this.downloadSong}
                         >Download</Button>
