@@ -1,6 +1,6 @@
 import axios from "axios";
-import { google } from 'googleapis';
-import { GoogleLogin } from 'react-google-login';
+// import { google } from 'googleapis';
+// import { GoogleLogin } from 'react-google-login';
 
 
 export default {
