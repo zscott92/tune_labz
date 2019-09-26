@@ -1,8 +1,9 @@
 const router = require("express").Router();
-// const bookRoutes = require("./books");
+const songRoutes = require("./songs");
+const userRoutes = require("./user");
 
-// router.use("./songs", songRoutes);
-// router.use("./user". userRoutes);
+router.use("/songs", songRoutes);
+router.use("/user", userRoutes);
 
 // const fileRoutes = require("../filesAPI/normalizeFileData");
 // router.use("./apifiles", fileRoutes);

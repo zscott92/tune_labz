@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import Tree from "../components/Tree/Tree";
 import SongData from "../components/SongData/SongData";
+import songdata from "../components/Tree/songData.json"
+
 
 //Grid and List html components not yet used====================================================
 // import { Col, Row, Container } from "../components/Grid";
@@ -8,20 +10,26 @@ import SongData from "../components/SongData/SongData";
 // import Jumbotron from "../components/Jumbotron";
 //==============================================================================================
 
-// import API from "../utils/API";
 
 // import TrackVisualizer from "../components/TrackVisualizer";
 
 class Dashboard extends Component {
 
   state = {
-    // songs
+    data: [],
+    clickedSong: {}
   };
 
   componentDidMount() {
-    // this.loadSongs();
+    this.setState({
+      data: songdata
+    })
   }
 
+  handleClick = song => {
+    console.log("handle DB: ", song);
+    this.setState({ clickedSong: song });
+  }
 
   //need to pass id from page load after user logs in.
   // loadSongs = id => {
@@ -39,10 +47,16 @@ class Dashboard extends Component {
         <div className="Dashboard text-center">
           <div className="row">
             <div className="col-4 sidebar">
-              <Tree />
+              <Tree
+                onClick={this.handleClick}
+                data={this.state.data} 
+                />
             </div>
             <div className="col-8 songdata">
-              <SongData />
+              <SongData 
+                song={this.state.clickedSong}
+              />  
+              {/* how to update song data to only pull song info from song with id passed from state */}
             </div>
           </div>
         </div>
