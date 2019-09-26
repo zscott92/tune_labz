@@ -104,9 +104,8 @@ class SongData extends Component {
                             onClick={this.handleSongRemix}
                         >Create Remix</Button>
                         <div className="App">
-                            <form>
-        <input id="file_input_file" type="file" onChange={(e) => this._handleFileChange(e)} ref={ref=> this.fileInput = ref} />
-        <button onClick={this.handleUpload}>Upload</button>
+        React.createElement('input',{type:'file', name:'myfile'})
+        React.createElement('a',{onClick: this.doClick},'Select File')
         <div> {Math.round(this.state.loaded,2) } %</div>
             </form>
       </div>
@@ -126,12 +125,18 @@ class SongData extends Component {
                             Add to my Library</Button>
                         <Button variant="dark"
                             onClick={this.downloadSong}
+
                         >
                             Download</Button>
                         <Button variant="link"
                             onClick={this.creatorLink}
                         >
                             Creator Home</Button>
+
+                        >Download</Button>
+                        <Button variant="warning"
+                            onClick={this.creatorLink}
+                        >Creator Home</Button>
                     </ButtonToolbar>
                 </div>
                 </div>

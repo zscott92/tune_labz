@@ -43,9 +43,11 @@ class Dashboard extends Component {
 
     return (
 
+
        <div>
         <div className="Dashboard text-center">
           <div className="row">
+
         <h1 className="dashTitle text-center">Tune Chainz Dashboard</h1>
         <div className="Dashboard text-center container">
           <div className="musicRow row">
