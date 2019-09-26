@@ -11,6 +11,7 @@ function App() {
         <Router>
             <div>
                 <Nav />
+                <br/>
                 <Wrapper>
                     <Route exact path="/login" component={Login} />
                     <Route exact path="/dashboard" component={Dashboard} />

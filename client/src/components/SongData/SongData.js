@@ -64,12 +64,10 @@ class SongData extends Component {
                             Add to my Library</Button>
                         <Button variant="dark"
                             onClick={this.downloadSong}
-                        >
-                            Download</Button>
-                            <Button variant="link"
-                                onClick={this.creatorLink}
-                            >
-                                Creator Home</Button>
+                        >Download</Button>
+                        <Button variant="warning"
+                            onClick={this.creatorLink}
+                        >Creator Home</Button>
                     </ButtonToolbar>
                 </div>
             </div>
