@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Wavesurfer from 'react-wavesurfer';
+import { SelectedValue } from '../SongData';
 
 class Wave extends React.Component {
   constructor(props) {

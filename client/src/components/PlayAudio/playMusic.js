@@ -1,6 +1,7 @@
 import {onChange}from '../FileUploads/upload';
 const { Component } = require("react");
 const ReactHowler = require('react-howler');
+const { File } = require('../SongData');
 class PlayMusic extends Component {
         getDuration() {
             this.player.duration()
@@ -9,13 +10,10 @@ class PlayMusic extends Component {
             this.player.seek()
           }
                  
-  setSeek() {
-    this.player.seek(0.5)
-  }
           render () {
             return(
               <ReactHowler
-                src= {[onChange]}
+                src= {[File]}
                 playing={true}
                 ref={(ref) => (this.player = ref)}
               />

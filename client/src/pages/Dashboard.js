@@ -57,7 +57,6 @@ class Dashboard extends Component {
             </div>
             <div className="col-8 songdata">
               <SongData 
-                song={this.state.clickedSong}
               />  
               {/* how to update song data to only pull song info from song with id passed from state */}
             </div>

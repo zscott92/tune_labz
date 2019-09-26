@@ -70,8 +70,7 @@ router.route("/:id").delete((req, res, next) => {
     if (err) {
       return next(err);
     }
-    //Now Delete the file from AWS-S3
-    // https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html#deleteObject-property
+   
     let s3bucket = new AWS.S3({
       accessKeyId: process.env.AWS_ACCESS_KEY_ID,
       secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
