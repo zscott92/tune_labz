@@ -23,13 +23,8 @@ class Tree extends Component {
   }
   render() {
     return (
-    <Router
-    history={history}
-    routes={routes}
-    render={applyRouterMiddleware(useFetchData(store))}
-    />,
       <div className="App">
-        <TreeMenu data={this.props.songs} onClickItem={(songs:id})} => this.props.onClick(songs:id)}>
+        <TreeMenu data={this.props.data} onClickItem={(song) => this.props.onClick(song)}>
           {({ items }) => (
             <ul style={{ listStyleType: "none" }}>
               {items.map(props => {
@@ -37,7 +32,6 @@ class Tree extends Component {
                 return (
                   <div key={props.song_id}>
                   <ItemComponent
-                    
                     {...props}
                     label={`${props.song_name} - ${props.song_desc}
                   [${props.song_genre}]

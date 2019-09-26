@@ -5,86 +5,121 @@ import API from "../../utils/API";
 import {Col, Container, Row} from "../Grid"
 import Wrapper from '../Wrapper';
 const {Progress} = require('reactstrap');
-const axios = require( 'axios');
+const axios = require('axios');
+const Howler = require('react-howler');
 
 class SongData extends Component {
     constructor(props) {
-    super(props);
-    this.state = {
-      selectedFile: null
+        super(props);
+        this.state = {
+            selectedFile: null
+        }
+        this.onChangeHandler = this.onChangeHandler.bind(this);
     }
-    this.onChangeHandler = this.onChangeHandler.bind(this);
-  }
 
-
-  onChangeHandler = event => {
-    this.setState({
-      selectedFile: event.target.files[0],
-      loaded: 0
-    })
-  }
-
- maxSelectFile=(event)=>{
-       if (this.state.selectedFile > 1) { 
-          const msg = 'Only 1 images can be uploaded at a time'
-          event.target.value = null 
-          console.log(msg)
-         return false;
-     }
-   return true;
-}
-
-
-    onClickHandler = () => {
-        event.preventDefault();
-        data.append('file', this.state.selectedFile, this.state.description);
-        axios.post(endpoint, data, {
-            onUploadProgress: ProgressEvent => {
-                this.setState({
-                    loaded: (ProgressEvent.loaded / ProgressEvent.total * 100),
-                }).then(() => {
-                    this.props.history.push("/");
-                })
-                    .catch(error => {
-                        alert("Well this is embarassing...file was unable to upload successfully")
-                    })
-            }
-        });
+          
+          
+    onChangeHandler = event => {
+        this.setState({
+            file: event.target.files[0],
+            isLoading: false,
+        })
     }
+    toggleHowler(props) {
+        (props.playing) ? this.play() : this.pause()
+        this.mute(props.mute)
+        this.loop(props.loop)
+        if (props.mute !== this.props.mute) {
+            this.mute(props.mute)
+        }
+
+        if (props.volume !== this.props.volume) {
+            this.volume(props.volume)
+        }
+
+    
+    
+    // handleTogglePlay() {
+    //     this.setState({
+    //         playing: !this.state.playing
+    //     });
+    // }
+
 
     handleSongRemix = () => {
         console.log("remix", this.props.song.song_id);
     };
-
-
-    downloadSong = () => {
+    handleselectedFile = event => {
+        this.setState({
+          selectedFile: event.target.files[0],
+          loaded: 0,
+        })
+    }
+    handleUpload = () => {
+        const data = new FormData()
+        data.append('file', this.state.selectedFile)
+        axios
+          .post("/api/upload", data, {
+            onUploadProgress: ProgressEvent => {
+              this.setState({
+                loaded: (ProgressEvent.loaded / ProgressEvent.total*100),
+              })
+            },
+          })
+          .then(res => {
+            console.log(res.statusText)
+          })  
         console.log("download", this.props.song.song_id)
     };
-
-
+    onChangeHandler = event => {
+        this.setState({
+            selectedFile: event.target.files[0],
+            loaded: 0
+        })
+    }
+    
+    // getDuration() {
+    //     this.player.duration()
+    // }
+    // getSeek() {
+    //     this.player.seek()
+    // }
+    maxSelectFile = (event) => {
+        if (this.state.selectedFile > 1) {
+            const msg = 'Only 1 images can be uploaded at a time'
+            event.target.value = null
+            console.log(msg)
+            return false;
+        }
+        return true;
+    }
+    }
 
     render() {
-    return (
-      <div> 
-                <div className="songinformation">
+        return (
+            <div className="songinformation">
                 <div className="button-toolbar">
                     <ButtonToolbar>
                         <Button variant="primary"
                             onClick={this.handleSongRemix}
                         >Create Remix</Button>
-                        <input type="file" hidden name="file" onChange={this.onChangeHandler} id="contained-button-file"/>
-                        <label htmlFor="contained-button-file">
-                        <button type="button" Button variant="dark" class="btn btn-success btn-block" id="contained-button-file" onClick={this.onClickHandler}>Upload</button>
-                        </label>
-                        <input type="submit" value="Submit" />
-                        <div class="form-group">
-                        <ReactHowler />
-                            <Wavesurfer />
-                            <Progress max="100" color="success" value={this.state.loaded} >{Math.round(this.state.loaded,2) }%</Progress>
-                            </div>
+                        <div className="App">
+                            <form>
+        <input id="file_input_file" type="file" onChange={(e) => this._handleFileChange(e)} ref={ref=> this.fileInput = ref} />
+        <button onClick={this.handleUpload}>Upload</button>
+        <div> {Math.round(this.state.loaded,2) } %</div>
+            </form>
+      </div>
+                    
+                   
+      
+
+                           
+                            
                         {/* <Button variant="secondary">Secondary</Button>
-                        <Button variant="warning">Warning</Button>
-                        <Button variant="danger">Danger</Button> */}
+                    <Button variant="warning">Warning</Button>
+                    <Button variant="danger">Danger</Button> */}
+                            
                         <Button variant="info"
                             onClick={this.handleSongAdd}
                         >
@@ -93,15 +128,17 @@ class SongData extends Component {
                             onClick={this.downloadSong}
                         >
                             Download</Button>
-                            <Button variant="link"
-                                onClick={this.creatorLink}
-                            >
-                                Creator Home</Button>
+                        <Button variant="link"
+                            onClick={this.creatorLink}
+                        >
+                            Creator Home</Button>
                     </ButtonToolbar>
                 </div>
-            </div>
-            </div>
-        );
+                </div>
+        )
     }
 }
 export default SongData;
+
+
+    
