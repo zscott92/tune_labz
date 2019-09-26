@@ -11,6 +11,11 @@ class Tree extends Component {
     this.state = {}
   }
 
+  componentDidMount = () => {
+  fetch('/api/songs')
+      .then(response => response.json())
+      .then((songs) => { this.setState({ songs }); });
+  }
 
   handleSongClick = (e, data) => {
     console.log("click" + data);
@@ -18,10 +23,13 @@ class Tree extends Component {
   }
   render() {
     return (
+    <Router
+    history={history}
+    routes={routes}
+    render={applyRouterMiddleware(useFetchData(store))}
+    />,
       <div className="App">
-
-
-        <TreeMenu data={this.props.data} onClickItem={(song) => this.props.onClick(song)}>
+        <TreeMenu data={this.props.songs} onClickItem={(songs:id})} => this.props.onClick(songs:id)}>
           {({ items }) => (
             <ul style={{ listStyleType: "none" }}>
               {items.map(props => {

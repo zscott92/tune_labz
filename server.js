@@ -5,6 +5,8 @@ const multer = require('multer')
 const cors = require('cors');
 const PORT = process.env.PORT || 3001;
 const app = express();
+const WaveformData = require('waveform-data');;
+const fs = require('fs');
 
 
 // Requiring our models for syncing
@@ -48,7 +50,15 @@ app.post('/upload',function(req, res) {
     })
 })
 
-// Add routes, both API
+const WaveformData = require('waveform-data');
+const express = require('express');
+const fs = require('fs');
+const app = express();
+ 
+const WaveformData = require('waveform-data');
+const request = require('superagent');
+const args = require('yargs').argv;
+
 app.use(routes);
 
 if (process.env.NODE_ENV === "production") {
