@@ -3,6 +3,7 @@ export default class Login extends Component {
       const { errorMsg } = this.props.params;
       return (
         <div className="error">
+          <div class="g-signin2" data-onsuccess="onSignIn"></div>
           <h2>An Error Occured</h2>
           <p>{errorMsg}</p>
         </div>
