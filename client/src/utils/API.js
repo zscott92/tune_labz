@@ -1,4 +1,6 @@
 import axios from "axios";
+// import { google } from 'googleapis';
+// import { GoogleLogin } from 'react-google-login';
 
 
 export default {
@@ -43,3 +45,19 @@ export default {
     return axios.post("/api/user", userData);
   }
 };
+
+//===================Google SIGNIN=====================
+// front end
+// function onSignIn(googleUser) {
+//   var id_token = googleUser.getAuthResponse().id_token;
+
+
+// var axios = new XMLHttpRequest();
+// axios.open('POST', 'https://yourbackend.example.com/tokensignin');
+// axios.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+// axios.onload = function() {
+//   console.log('Signed in as: ' + xhr.responseText);
+// };
+// axios.send('idtoken=' + id_token);
+
+
