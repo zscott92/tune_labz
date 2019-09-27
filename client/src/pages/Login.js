@@ -18,12 +18,12 @@ class Login extends Component {
             cache: 'default'
         };
         fetch('/auth/google', options).then(r => {
-           
+
             const token = r.headers.get('x-auth-token');
             r.json().then(user => {
                 if (token) {
                     this.setState({ isAuthenticated: true, user, token });
-                                        // key value pair
+                    // key value pair
                     localStorage.setItem('token', token);
                 }
             });
@@ -34,7 +34,7 @@ class Login extends Component {
     logout = () => {
         this.setState({ isAuthenticated: false, token: '', user: null })
     };
-    
+
     onFailure = (error) => {
         console.log(error);
     };
@@ -56,9 +56,9 @@ class Login extends Component {
                 if (token) {
                     console.log(token);
                     this.setState({ isAuthenticated: true, user, token });
-                                        
-                    
-                    
+
+
+
                 }
             });
         })
@@ -68,15 +68,6 @@ class Login extends Component {
     render() {
         let content = !!this.state.isAuthenticated ?
 
-            // <div className="container">
-
-            //     <div className="jumbotron text-center">
-            //         <h1 className="display-4">Tune Chainz</h1>
-            //         <p className="lead">Our application allows users to share and collaborate music projects,
-            //         edit them on  their local computer, and upload the remixed file back to the project file.</p>
-
-
-            //         <br/>
             (
                 <div>
                     <p>Authenticated</p>
@@ -104,8 +95,18 @@ class Login extends Component {
             );
 
         return (
-            <div className="App">
-                {content}
+            <div className="container">
+
+                <div className="jumbotron text-center">
+                    <h1 className="display-4">Tune Chainz</h1>
+                    <p className="lead">Our application allows users to share and collaborate music projects,
+                    edit them on  their local computer, and upload the remixed file back to the project file.</p>
+
+                    <div className="App">
+                        {content}
+                    </div>
+
+                </div>
             </div>
         );
     }
