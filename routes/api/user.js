@@ -9,10 +9,10 @@ router.route("/:id")
 
   
 //matches with api/user/:id
-// router
-//   .route("/:id")
-//   .get(profileController.findById)
-//   .put(profileController.update)
-//   .delete(profileController.remove);
+router
+  .route("/:id")
+  .get(profileController.findById)
+  .put(profileController.update)
+  .delete(profileController.remove);
 
 module.exports = router;

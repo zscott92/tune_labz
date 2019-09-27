@@ -23,12 +23,12 @@ class Dashboard extends Component {
   };
 
   componentDidMount() {
-    const dbData = API.getUserSongs(1); 
-    console.log(dbData);
-    console.log("dashboard api get request");
-    this.setState({
-      data: songdata
-    })
+    API.getUserSongs(1).then(dbData => {
+      console.log(dbData)
+      this.setState({
+        data: dbData.data
+      })
+    });
   }
 
   handleClick = song => {
@@ -54,13 +54,13 @@ class Dashboard extends Component {
             <div className="col-4 sidebar">
               <Tree
                 onClick={this.handleClick}
-                data={this.state.data} 
-                />
+                data={this.state.data}
+              />
             </div>
             <div className="col-8 songdata">
-              <SongData 
+              <SongData
                 song={this.state.clickedSong}
-              />  
+              />
               {/* how to update song data to only pull song info from song with id passed from state */}
             </div>
           </div>

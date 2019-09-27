@@ -29,37 +29,24 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.INTEGER,
             allowNull: true
         },
-        song_par_id: {
-            type: DataTypes.INTEGER,
+        createdAt: {
+            type: DataTypes.DATE,
+            allowNull: true
+        },
+        updatedAt: {
+            type: DataTypes.DATE,
             allowNull: true
         }
-        // collaborators: {
-        //     type: DataTypes.STRING,
-        //     get: function () {
-        //         return JSON.parse(this.getDataValue(Song.associate.models.User));
-        //     },
-        //     set: function (artists) {
-        //         return this.setDataValue('collaborators', JSON.stringify(artists));
-        //     }
-        // },
+
     });
 
-    //TODO need to make sure how this references songs to songs and create post request
-
-    // Song.associate = function (models) {
-    //     Song.belongsTo(models.User, {
-    //         foreignKey: {
-    //             allowNull: false
-    //         }
-    //     });
-    // };
-
-    // Song.associate = function(db) {
-    //     db.Song.hasMany(db.Song, {
-    //         onDelete: 'CASCADE',
-    //         foreignKey: 'parent',
-    //         as: 'children',
-    //     });
-    // };
+    Song.associate = function(db) {
+        db.Song.hasMany(db.Song, {
+            onDelete: 'CASCADE',
+            foreignKey: 'song_par_id',
+            as: 'nodes',
+        });
+    };
     return Song;
+
 }

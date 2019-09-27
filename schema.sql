@@ -1,4 +1,4 @@
 
-DROP DATABASE IF EXISTS metamusic_db;
+-- DROP DATABASE IF EXISTS metamusic_db;
 
-CREATE DATABASE metamusic_db;
+-- CREATE DATABASE metamusic_db;
