@@ -1,9 +1,9 @@
 const router = require("express").Router();
-const profileController = require("../../controllers/profileController");
+const profileController = require("../../controllers/userController");
 const songsController = require("../../controllers/songsController");
 
-//matches with api/user/:userid/songs 
-router.route("/:id/songs")
+//matches with api/user/:userid/
+router.route("/:id")
   .get(songsController.findAll)
   .post(songsController.create);
 

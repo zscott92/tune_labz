@@ -7,7 +7,7 @@
     "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
     "start:prod": "node server.js",
     "start:dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
-    "client": "cd client && npm run start",
+    "client": "cd client && npm run start", 
     "install": "cd client && npm install",
     "build": "cd client && npm run build",
     "heroku-postbuild": "npm run build"
@@ -30,6 +30,7 @@
     "curl": "^0.1.4",
     "dotenv": "^8.1.0",
     "express": "^4.17.1",
+    "file-system": "^2.2.2",
     "google-auth-library": "^5.2.2",
     "googleapis": "^43.0.0",
     "howler": "^2.1.2",

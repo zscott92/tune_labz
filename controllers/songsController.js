@@ -6,7 +6,14 @@ module.exports = {
   findAll: function (req, res) {
     db.Song
       .findAll({
-        where: { user_id: req.query.id }
+        where: {
+          user_id: req.params.id,
+        },
+        include: ["nodes"]
+        //.then(dbModel.data => 
+        //dbModel.data.nodes = [
+          //song_par_id: dbModel.data[i] 
+ 
       })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));

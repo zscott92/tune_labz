@@ -5,12 +5,6 @@ import API from "../../utils/API";
 // import {Col, Container, Row} from "../Grid"
 
 class SongData extends Component {
-    // constructor(props) {
-    //     super(props);
-    //     // Don't call this.setState() here!
-    //     // this.state = {}
-    // }
-
     componentDidUpdate() {
         console.log('props', this.props.song);
     }

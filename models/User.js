@@ -1,23 +1,33 @@
 module.exports = function (sequelize, DataTypes) {
 
     var User = sequelize.define("User", {
+        id: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            primaryKey: true
+        },
         user_name: {
             type: DataTypes.STRING,
-            allowNull: false,
-            validate: {
-                len: [1]
-            }
+            allowNull: false
         },
         user_email: DataTypes.STRING,
         user_password: {
-            type: DataTypes.STRING
+            type: DataTypes.STRING,
         },
-        user_tagline: {
-            type: DataTypes.STRING
+        artistname: {
+            type: DataTypes.STRING,
+            allowNull: false
         },
-        user_summary: {
-            type: DataTypes.STRING
+        createdAt: {
+            type: DataTypes.DATE,
+            allowNull: true
         },
+        updatedAt: {
+            type: DataTypes.DATE,
+            allowNull: true
+        }
+    });
+
         googleProviderId: DataTypes.STRING,
         googleProviderToken: DataTypes.STRING
     });
@@ -56,6 +66,5 @@ module.exports = function (sequelize, DataTypes) {
             onDelete: "cascade"
         });
     };
-
     return User;
 };

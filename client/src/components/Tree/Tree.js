@@ -26,17 +26,16 @@ class Tree extends Component {
           {({ items }) => (
             <ul style={{ listStyleType: "none" }}>
               {items.map(props => {
-                // console.log(props);
+                console.log(props);
                 return (
                   <div key={props.song_id}>
                   <ItemComponent
                     
                     {...props}
                     label={`${props.song_name} - ${props.song_desc}
-                  [${props.song_genre}]
+                  [${props.song_genres}]
                   `}
                   />
-                  <button onClick={this.props.onClick} />
                   </div>
                 );
               })}
