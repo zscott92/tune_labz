@@ -17,15 +17,7 @@ module.exports = function (sequelize, DataTypes) {
             allowNull: false
         }
     },
-    {
-        timestamps: true
-    });
-
-    User.associate = function (models) {
-        User.hasMany(models.Song, {
-            onDelete: "cascade"
-        });
-    };
+    );
 
     return User;
 };

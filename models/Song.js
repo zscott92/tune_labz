@@ -32,12 +32,6 @@ module.exports = function (sequelize, DataTypes) {
         song_par_id: {
             type: DataTypes.INTEGER,
             allowNull: true
-        },
-        classmethods: {
-            associate: function (models) {
-                Song.hasMany(models.Song, { as: 'children', foreignKey: "song_par_id" });
-                Song.belongsTo(models.Song, { as: 'parent', foreignKey: "song_par_id" });
-            }
         }
         // collaborators: {
         //     type: DataTypes.STRING,
@@ -48,10 +42,7 @@ module.exports = function (sequelize, DataTypes) {
         //         return this.setDataValue('collaborators', JSON.stringify(artists));
         //     }
         // },
-    },
-        {
-            timestamps: true
-        });
+    });
 
     //TODO need to make sure how this references songs to songs and create post request
 
@@ -63,12 +54,11 @@ module.exports = function (sequelize, DataTypes) {
     //     });
     // };
 
-    // Song.associate = function (models) {
-    //     models.Song.hasOne(models.Song, {
-    //         as: 'Parent',
-    //         foreignKey: 'parent_id',
-    //         through: null,
-    //         onDelete: 'CASCADE'
+    // Song.associate = function(db) {
+    //     db.Song.hasMany(db.Song, {
+    //         onDelete: 'CASCADE',
+    //         foreignKey: 'parent',
+    //         as: 'children',
     //     });
     // };
     return Song;

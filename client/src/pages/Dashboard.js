@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import Tree from "../components/Tree/Tree";
 import SongData from "../components/SongData/SongData";
+import API from "../utils/API";
 import songdata from "../components/Tree/songData.json"
+
 
 
 //Grid and List html components not yet used====================================================
@@ -21,6 +23,9 @@ class Dashboard extends Component {
   };
 
   componentDidMount() {
+    const dbData = API.getUserSongs(1); 
+    console.log(dbData);
+    console.log("dashboard api get request");
     this.setState({
       data: songdata
     })

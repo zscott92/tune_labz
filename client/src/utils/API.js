@@ -10,7 +10,8 @@ export default {
   },
   //gets song with given user id
   getUserSongs: function (id) {
-    return axios.get(`api/user/${id}/songs`);
+    console.log(`api/user/${id}`)
+    return axios.get(`/api/user/${id}`);
   },
 
   //gets child songs of a song by song id

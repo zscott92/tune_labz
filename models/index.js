@@ -33,4 +33,8 @@ Object.keys(db).forEach(function(modelName) {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
+db.User.hasMany(db.Song);
+db.Song.belongsTo(db.User);
+
+
 module.exports = db;

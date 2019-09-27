@@ -2,14 +2,12 @@ import React, { Component } from "react";
 import Button from 'react-bootstrap/Button'
 import ButtonToolbar from 'react-bootstrap/ButtonToolbar'
 import API from "../../utils/API";
-import {Col, Container, Row} from "../Grid"
+// import {Col, Container, Row} from "../Grid"
 
 class SongData extends Component {
-    constructor(props) {
-        super(props);
-        // Don't call this.setState() here!
-        // this.state = {}
-    }
+    // constructor(props) {
+    //     super(props);
+    // }
 
     componentDidUpdate() {
         console.log('props', this.props.song);
