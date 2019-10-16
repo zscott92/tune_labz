@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Button from 'react-bootstrap/Button'
 import ButtonToolbar from 'react-bootstrap/ButtonToolbar'
 import API from "../../utils/API";
+import Upload from '../Upload/Upload'
 // import {Col, Container, Row} from "../Grid"
 
 class SongData extends Component {
@@ -46,9 +47,9 @@ class SongData extends Component {
                             onClick={this.handleSongRemix}
                         >Create Remix</Button>
                         <Button variant="success"
-                            onClick={this.handleUpload}
+                            // onClick={this.handleUpload}
                         >
-                            Upload New Song</Button>
+                            <Upload /></Button>
                         {/* <Button variant="secondary">Secondary</Button>
                         <Button variant="warning">Warning</Button>
                         <Button variant="danger">Danger</Button> */}

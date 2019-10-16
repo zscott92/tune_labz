@@ -28,9 +28,9 @@ module.exports = function (sequelize, DataTypes) {
         }
     });
 
-        googleProviderId: DataTypes.STRING,
-        googleProviderToken: DataTypes.STRING
-    });
+        // googleProviderId: DataTypes.STRING,
+        // googleProviderToken: DataTypes.STRING
+    // });
 
     User.upsertGoogleUser = function (accessToken, refreshToken, profile, cb) {
         return this.findOne({
