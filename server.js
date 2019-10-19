@@ -14,11 +14,6 @@ const upload = require('./routes/api/upload')
 var db = require("./models");
 
 
-// app.use(busboy());
-// app.use(bodyParser.urlencoded({ extended: true }));
-// app.use(bodyParser.json());
-// app.use(busboyBodyParser());
-// app.use(cors(corsOption));
 app.use(fileUpload());
 // Define middleware here
 app.use(express.urlencoded({ extended: true }));

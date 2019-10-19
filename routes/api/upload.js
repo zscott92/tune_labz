@@ -6,10 +6,14 @@ const mongodb = require('mongodb');
 const MongoClient = require('mongodb').MongoClient;
 const ObjectID = require('mongodb').ObjectID;
 const { Readable } = require('stream');
+require("dotenv").config();
+
+module.exports = function(app) {
 
 app.use('/tracks', trackRoute);
+const uri = 'mongodb://${process.env.AWS_BUCKET_NAME}:${process.env.AZURE_COSMOS_MASTER_KEY}@${process.env.AWS_BUCKET_NAME}.documents.azure.com:10255/mean-dev?ssl=true&sslverifycertificate=false'
 let db;
-MongoClient.connect('mongodb://localhost/trackDB', (err, database) => {
+MongoClient.connect(uri, (err, database) => {
   if (err) {
     console.log('MongoDB Connection Error. Please make sure that MongoDB is running.');
     process.exit(1);
@@ -77,4 +81,4 @@ trackRoute.post('/', (req, res) => {
     });
   });
 });
-
+}
