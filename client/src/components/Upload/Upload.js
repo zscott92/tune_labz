@@ -111,9 +111,11 @@ class Upload extends Component {
         this.setState({ uploadProgress: copy });
         reject(req.response);
       });
-      const formData = new FormData();
+      // const formData = new FormData();
+      // formData.append("file", file, file.name);
+      var formData = new FormData();
       formData.append("file", file, file.name);
-      req.open("POST", "api/upload");
+      req.open("POST", "/tracks", true);
       req.send(formData);
     });
   }

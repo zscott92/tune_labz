@@ -3,31 +3,22 @@ const express = require("express");
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const routes = require("./routes");
-const busboy = require('connect-busboy');
-const busboyBodyParser = require('busboy-body-parser');
 const PORT = process.env.PORT || 3001;
 const app = express();
 const bodyParser = require('body-parser')
 const fileUpload = require('express-fileupload');
+const upload = require('./routes/api/upload')
 
 
 // Requiring our models for syncing
 var db = require("./models");
 
-const corsOption = {
-    origin: true,
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    credentials: true,
-    exposedHeaders: ['x-auth-token'],
-    optionsSuccessStatus: 200,
-};
 
-
-app.use(busboy());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
-app.use(busboyBodyParser());
-app.use(cors(corsOption));
+// app.use(busboy());
+// app.use(bodyParser.urlencoded({ extended: true }));
+// app.use(bodyParser.json());
+// app.use(busboyBodyParser());
+// app.use(cors(corsOption));
 app.use(fileUpload());
 // Define middleware here
 app.use(express.urlencoded({ extended: true }));
