@@ -43,26 +43,23 @@ class SongData extends Component {
                 </div>
                 <div className="button-toolbar">
                     <ButtonToolbar>
-                        <Button variant="primary"
-                            onClick={this.handleSongRemix}
-                        >Create Remix</Button>
-                        <Button variant="success"
+                        {/* <Button variant="success"
                             // onClick={this.handleUpload}
-                        >
-                            <Upload /></Button>
+                        > */}
+                            <Upload />
                         {/* <Button variant="secondary">Secondary</Button>
                         <Button variant="warning">Warning</Button>
                         <Button variant="danger">Danger</Button> */}
-                        <Button variant="info"
-                            onClick={this.handleSongAdd}
-                        >
-                            Add to my Library</Button>
+                        <div className="jumbotron">
+                        <div className="col">
                         <Button variant="dark"
                             onClick={this.downloadSong}
                         >Download</Button>
                         <Button variant="warning"
                             onClick={this.creatorLink}
                         >Creator Home</Button>
+                        </div>
+                        </div>
                     </ButtonToolbar>
                 </div>
             </div>

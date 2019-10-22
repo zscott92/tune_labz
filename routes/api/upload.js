@@ -1,6 +1,5 @@
 const express = require('express');
 const app = express();
-const trackRoute = express.Router();
 const multer = require('multer');
 const mongodb = require('mongodb');
 const MongoClient = require('mongodb').MongoClient;
@@ -9,18 +8,16 @@ const { Readable } = require('stream');
 require("dotenv").config();
 
 module.exports = function(app) {
-
-app.use('/tracks', trackRoute);
-const uri = 'mongodb://${process.env.AWS_BUCKET_NAME}:${process.env.AZURE_COSMOS_MASTER_KEY}@${process.env.AWS_BUCKET_NAME}.documents.azure.com:10255/mean-dev?ssl=true&sslverifycertificate=false'
+const uri = 'mongodb://tunechains:n9J9LWhZyudl54MlYf4Wg7AhrLP8jiFBHYe7liQx0VrxPrCayCXCCt33BA04jAMx7AT1sj7X76lA6g9rQJVDXg%3D%3D@tunechains.documents.azure.com:10255/?ssl=true';
 let db;
 MongoClient.connect(uri, (err, database) => {
   if (err) {
-    console.log('MongoDB Connection Error. Please make sure that MongoDB is running.');
+    console.log('error. Please make sure that MongoDB is running.');
     process.exit(1);
   }
   db = database;
 });
-trackRoute.get('/:trackID', (req, res) => {
+trackRoute.get('/:tracks_id', (req, res) => {
   try {
     var trackID = new ObjectID(req.params.trackID);
   } catch(err) {
@@ -48,7 +45,7 @@ trackRoute.get('/:trackID', (req, res) => {
   });
 });
 
-trackRoute.post('/', (req, res) => {
+trackRoute.post('/tracks', (req, res) => {
   const storage = multer.memoryStorage()
   const upload = multer({ storage: storage, limits: { fields: 1, fileSize: 6000000, files: 1, parts: 2 }});
   upload.single('track')(req, res, (err) => {

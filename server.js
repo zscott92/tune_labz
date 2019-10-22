@@ -1,26 +1,27 @@
 require("dotenv").config();
 const express = require("express");
 const cookieParser = require('cookie-parser');
-const cors = require('cors');
 const routes = require("./routes");
 const PORT = process.env.PORT || 3001;
 const app = express();
-const bodyParser = require('body-parser')
-const fileUpload = require('express-fileupload');
-const upload = require('./routes/api/upload')
+const tracks = require('./routes/api/upload');
+const trackRoute = express.Router();
+const path = require('path');
+
+//  app.use('/assets', express.static('assets'))
 
 
 // Requiring our models for syncing
 var db = require("./models");
 
-
-app.use(fileUpload());
 // Define middleware here
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.json());
 app.engine('html', require('ejs').renderFile);
 app.use(routes);
+app.use(tracks);
+app.use('/tracks', trackRoute);
 
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {

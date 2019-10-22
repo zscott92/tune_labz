@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Dropzone from '../Dropzone/Dropzone';
 import Progress from '../Progress/Progress';
 import './Upload.css';
+require("dotenv").config();
 
 class Upload extends Component {
   constructor(props) {
@@ -68,62 +69,67 @@ class Upload extends Component {
     }
   }
 
-  async uploadFiles() {
-    this.setState({ uploadProgress: {}, uploading: true });
-    const promises = [];
-    this.state.files.forEach(file => {
-      promises.push(this.sendRequest(file));
-    });
-    try {
-      await Promise.all(promises);
 
-      this.setState({ successfullUploaded: true, uploading: false });
-    } catch (e) {
-      console.error(e + "Unfortunatly an error occured during upload")
-      this.setState({ successfullUploaded: true, uploading: false });
-    }
+  async uploadFiles() {
+    console.log("Uploading tracks to CosmosDB");
+    let apiUrl = 'http://localhost:3000/tracks';
+    let uri = 'mongodb://tunechains:n9J9LWhZyudl54MlYf4Wg7AhrLP8jiFBHYe7liQx0VrxPrCayCXCCt33BA04jAMx7AT1sj7X76lA6g9rQJVDXg==@tunechains.documents.azure.com:10255/?ssl=true&replicaSet=globaldb';
+    let uriParts = uri.split('.');
+    let fileType = uriParts[uriParts.length - 1];
+  
+    let formData = new FormData();
+    formData.append('file', {
+      uri,
+      file_id: `recording.${fileType}`,
+      type: `audio/x-${fileType}`,
+    });
+  
+    let options = {
+      method: 'POST',
+      body: formData,
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'multipart/form-data',
+      },
+    };
+  
+    console.log("Posting " + uri + " to " + apiUrl);
+    return fetch(apiUrl, options);
   }
 
   sendRequest(file) {
     return new Promise((resolve, reject) => {
-      const req = new XMLHttpRequest();
-      req.upload.addEventListener("progress", event => {
-        if (event.lengthComputable) {
-          const copy = { ...this.state.uploadProgress };
-          copy[file.name] = {
-            state: "pending",
-            percentage: (event.loaded / event.total) * 100
-          };
-          this.setState({ uploadProgress: copy });
-        }
-      });
-
-      req.upload.addEventListener("load", event => {
-        const copy = { ...this.state.uploadProgress };
-        copy[file.name] = { state: "done", percentage: 100 };
-        this.setState({ uploadProgress: copy });
-        resolve(req.response);
-      });
-
-      req.upload.addEventListener("error", event => {
-        const copy = { ...this.state.uploadProgress };
-        copy[file.name] = { state: "error", percentage: 0 };
-        this.setState({ uploadProgress: copy });
-        reject(req.response);
-      });
-      // const formData = new FormData();
-      // formData.append("file", file, file.name);
-      var formData = new FormData();
-      formData.append("file", file, file.name);
-      req.open("POST", "/tracks", true);
-      req.send(formData);
+     const req = new XMLHttpRequest();
+   
+     req.upload.addEventListener("progress", event => {
+      if (event.lengthComputable) {
+       const copy = { ...this.state.uploadProgress };
+       copy[file.name] = {
+        state: "pending",
+        percentage: (event.loaded / event.total) * 100
+       };
+       this.setState({ uploadProgress: copy });
+      }
+     });
+      
+     req.upload.addEventListener("load", event => {
+      const copy = { ...this.state.uploadProgress };
+      copy[file.name] = { state: "done", percentage: 100 };
+      this.setState({ uploadProgress: copy });
+      resolve(req.response);
+     });
+      
+     req.upload.addEventListener("error", event => {
+      const copy = { ...this.state.uploadProgress };
+      copy[file.name] = { state: "error", percentage: 0 };
+      this.setState({ uploadProgress: copy });
+      reject(req.response);
+     });
     });
-  }
-
+   }
   render() {
     return (
-      <div className="Upload">
-        <span className="Title">Upload Files</span>
+      <div className="jumbotron">
         <div className="Content">
           <div>
             <Dropzone
