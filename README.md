@@ -1,1 +1,3 @@
 #tune_labz
+
+Tune Labz is a an offshoot of our final group project for Georgia Tech's Web Development Program. In this application we used a MERN stack framework, along with react, plain javascript, nodejs, express framework, mongodb and mySQL database. Our application aims to sit at the intersection of a collaborative open-source music project, an audio editor, as well, as a place to track changes and effectively act as a tool for source control. This app aims to be innovative, functional, as well as, hopefully memorable! Enjoy, mess around, and let me know what you think about it. Any and all feedback is greatly appreciated.
