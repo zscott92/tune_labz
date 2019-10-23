@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import Dropzone from '../Dropzone/Dropzone';
 import Progress from '../Progress/Progress';
 import './Upload.css';
+import Sound from 'react-sound';
+// import { AudioUtils } from 'react-native-audio';
+import {AudioRecorder, AudioUtils} from 'react-native-audio';
 require("dotenv").config();
 
 class Upload extends Component {
@@ -71,62 +74,93 @@ class Upload extends Component {
 
 
   async uploadFiles() {
-    console.log("Uploading tracks to CosmosDB");
-    let apiUrl = 'http://localhost:3000/tracks';
-    let uri = 'mongodb://tunechains:n9J9LWhZyudl54MlYf4Wg7AhrLP8jiFBHYe7liQx0VrxPrCayCXCCt33BA04jAMx7AT1sj7X76lA6g9rQJVDXg==@tunechains.documents.azure.com:10255/?ssl=true&replicaSet=globaldb';
-    let uriParts = uri.split('.');
-    let fileType = uriParts[uriParts.length - 1];
-  
-    let formData = new FormData();
-    formData.append('file', {
-      uri,
-      file_id: `recording.${fileType}`,
-      type: `audio/x-${fileType}`,
+    this.setState({ uploadProgress: {}, uploading: true });
+    const promises = [];
+    this.state.files.forEach(file => {
+      promises.push(this.sendRequest(file));
     });
-  
-    let options = {
-      method: 'POST',
-      body: formData,
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'multipart/form-data',
-      },
-    };
-  
-    console.log("Posting " + uri + " to " + apiUrl);
-    return fetch(apiUrl, options);
+    // console.log("Uploading tracks to CosmosDB");
+    // let apiUrl = '/tracks';
+    // let uri = file[0];
+    // console.log(uri)
+    // let uriParts = uri.split('.');
+    // console.log(uriParts)
+    // let fileType = uriParts[uriParts.length - 1];
+
+    // let formData = new FormData();
+    // formData.append('file', {
+    //   uri: uri,
+    //   track: `recording.${fileType}`,
+    //   type: `audio/x-${fileType}`,
+    // });
+
+    // let options = {
+    //   method: 'POST',
+    //   body: formData,
+    //   headers: {
+    //     'Accept': 'application/json',
+    //     'Content-Type': 'multipart/form-data',
+    //   },
+    // };
+
+    // console.log("Posting " + uri + " to " + apiUrl);
+    // return fetch(apiUrl, options);
   }
 
-  sendRequest(file) {
+    async sendRequest(file) {
     return new Promise((resolve, reject) => {
-     const req = new XMLHttpRequest();
-   
-     req.upload.addEventListener("progress", event => {
-      if (event.lengthComputable) {
-       const copy = { ...this.state.uploadProgress };
-       copy[file.name] = {
-        state: "pending",
-        percentage: (event.loaded / event.total) * 100
-       };
-       this.setState({ uploadProgress: copy });
+      const req = new XMLHttpRequest();
+
+      req.upload.addEventListener("progress", event => {
+        if (event.lengthComputable) {
+          const copy = { ...this.state.uploadProgress };
+          copy[file.name] = {
+            state: "pending",
+            percentage: (event.loaded / event.total) * 100
+          };
+          this.setState({ uploadProgress: copy });
+        }
+      });
+
+      req.upload.addEventListener("load", event => {
+        const copy = { ...this.state.uploadProgress };
+        copy[file.name] = { state: "done", percentage: 100 };
+        this.setState({ uploadProgress: copy });
+        resolve(req.response);
+      });
+
+      req.upload.addEventListener("error", event => {
+        const copy = { ...this.state.uploadProgress };
+        copy[file.name] = { state: "error", percentage: 0 };
+        this.setState({ uploadProgress: copy });
+        reject(req.response);
+      });
+      const path = 'file://' + AudioUtils.DocumentDirectoryPath + 'test.aac'
+      console.log(path)
+      const formData = new FormData();
+      console.log(file);
+      formData.append('file', {
+        uri: path,
+        name: 'test.aac',
+        type: 'audio/aac',
+      })
+      try {
+        const res = fetch('/tracks', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+          body: formData,
+        })
+        const json = res.json()
+      } catch (err) {
+        alert(err)
       }
-     });
-      
-     req.upload.addEventListener("load", event => {
-      const copy = { ...this.state.uploadProgress };
-      copy[file.name] = { state: "done", percentage: 100 };
-      this.setState({ uploadProgress: copy });
-      resolve(req.response);
-     });
-      
-     req.upload.addEventListener("error", event => {
-      const copy = { ...this.state.uploadProgress };
-      copy[file.name] = { state: "error", percentage: 0 };
-      this.setState({ uploadProgress: copy });
-      reject(req.response);
-     });
+       // req.open("POST", "/tracks");
+      // req.send(formData);
     });
-   }
+  }
+
   render() {
     return (
       <div className="jumbotron">
@@ -143,6 +177,7 @@ class Upload extends Component {
                 <div key={file.name} className="Row">
                   <span className="Filename">{file.name}</span>
                   {this.renderProgress(file)}
+                  ref = {file.name}
                 </div>
               );
             })}

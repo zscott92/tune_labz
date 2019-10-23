@@ -4,11 +4,9 @@ const cookieParser = require('cookie-parser');
 const routes = require("./routes");
 const PORT = process.env.PORT || 3001;
 const app = express();
-const tracks = require('./routes/api/upload');
+// const tracks = require('./routes/api/upload');
 const trackRoute = express.Router();
 const path = require('path');
-const express = require('express');
-const trackRoute = express.Router();
 const multer = require('multer');
 const mongodb = require('mongodb');
 const MongoClient = require('mongodb').MongoClient;
@@ -16,30 +14,24 @@ const ObjectID = require('mongodb').ObjectID;
 const { Readable } = require('stream');
 const db = require("./models");
 
-app.use('/tracks', trackRoute);
+
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.json());
 app.engine('html', require('ejs').renderFile);
 app.use(routes);
-app.use(tracks);
-app.use('/tracks', trackRoute);
 
-/**
- * Connect Mongo Driver to MongoDB.
- */
-let db;
+let db2;
 MongoClient.connect(process.env.AZURE_URI, (err, database) => {
   if (err) {
     console.log('MongoDB Connection Error. Please make sure that MongoDB is running.');
     process.exit(1);
   }
-  db = database;
+  db2 = database;
 });
 
-/**
- * GET /tracks/:trackID
- */
+
+app.use('/tracks', trackRoute);
 trackRoute.get('/:trackID', (req, res) => {
   try {
     var trackID = new ObjectID(req.params.trackID);
@@ -68,7 +60,7 @@ trackRoute.get('/:trackID', (req, res) => {
   });
 });
 
-trackRoute.post('/', (req, res) => {
+app.post('/', (req, res) => {
   const storage = multer.memoryStorage()
   const upload = multer({ storage: storage, limits: { fields: 1, fileSize: 6000000, files: 1, parts: 2 }});
   upload.single('track')(req, res, (err) => {

@@ -1,52 +1,80 @@
 module.exports = function (sequelize, DataTypes) {
 
-    var Song = sequelize.define("Song", {
-        key: {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
-        song_name: {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
-        song_desc: {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
-        song_pic_url: {
-            type: DataTypes.STRING,
-            allowNull: true
-        },
-        song_genres: {
-            type: DataTypes.STRING,
-            allowNull: true
-        },
-        song_id: {
-            type: DataTypes.INTEGER,
-            allowNull: true
-        },
-        user_id: {
-            type: DataTypes.INTEGER,
-            allowNull: true
-        },
-        createdAt: {
-            type: DataTypes.DATE,
-            allowNull: true
-        },
-        updatedAt: {
-            type: DataTypes.DATE,
-            allowNull: true
-        }
+    var MongoClient = require('mongodb').MongoClient;
+var assert = require('assert');
+var ObjectId = require('mongodb').ObjectID;
+var url = 'mongodb://<username>:<password>@<endpoint>.documents.azure.com:10255/?ssl=true';
 
-    });
+var insertDocument = function(db, callback) {
+db.collection('tracks').insertOne( {
+        "id": "AndersenFamily",
+        "lastName": "Andersen",
+        "parents": [
+            { "firstName": "Thomas" },
+            { "firstName": "Mary Kay" }
+        ],
+        "children": [
+            { "firstName": "John", "gender": "male", "grade": 7 }
+        ],
+        "pets": [
+            { "givenName": "Fluffy" }
+        ],
+        "address": { "country": "USA", "state": "WA", "city": "Seattle" }
+    }, function(err, result) {
+    assert.equal(err, null);
+    console.log("Inserted a document into the families collection.");
+    callback();
+});
+};
 
-    Song.associate = function(db) {
-        db.Song.hasMany(db.Song, {
-            onDelete: 'CASCADE',
-            foreignKey: 'song_par_id',
-            as: 'nodes',
+var findFamilies = function(db, callback) {
+var cursor =db.collection('families').find( );
+cursor.each(function(err, doc) {
+    assert.equal(err, null);
+    if (doc != null) {
+        console.dir(doc);
+    } else {
+        callback();
+    }
+});
+};
+
+var updateFamilies = function(db, callback) {
+db.collection('families').updateOne(
+    { "lastName" : "Andersen" },
+    {
+        $set: { "pets": [
+            { "givenName": "Fluffy" },
+            { "givenName": "Rocky"}
+        ] },
+        $currentDate: { "lastModified": true }
+    }, function(err, results) {
+    console.log(results);
+    callback();
+});
+};
+
+var removeFamilies = function(db, callback) {
+db.collection('families').deleteMany(
+    { "lastName": "Andersen" },
+    function(err, results) {
+        console.log(results);
+        callback();
+    }
+);
+};
+
+MongoClient.connect(url, function(err, client) {
+assert.equal(null, err);
+var db = client.db('familiesdb');
+insertDocument(db, function() {
+    findFamilies(db, function() {
+    updateFamilies(db, function() {
+        removeFamilies(db, function() {
+            client.close();
         });
-    };
-    return Song;
-
+    });
+    });
+});
+});
 }
