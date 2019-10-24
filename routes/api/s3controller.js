@@ -1,38 +1,25 @@
-const aws = require('aws-sdk');
-require('dotenv').config();
+var AWS = require("aws-sdk");
 
-aws.config.update({
-    region: process.env.AWS_REGION,
-    accessKey: process.env.AWS_ACCESS_KEY,
-    secretAccessKey: process.env.AWS_SECRET_KEY
+module.exports = function(app) {
+AWS.config.update({
+  region: 'us-east-2',
+  accessKeyId: '<access_key>',
+  secretAccessKey: '<secret_key>'
 })
 
-const bucket = process.env.AWS_BUCKET;
+export const s3 = new AWS.S3({
+  params: {
+    Bucket: 'BUCKETNAME'
+  },
+  apiVersion: '2006-03-01',
+});
 
-exports.sign_s3 = (req, res) => {
-    const s3 = new aws.s3();
-    const fileName = req.body.fileName;
-    const fileType = req.body.fileType;
+export const list_ = s3.listObjects({Delimiter: '/invoice/'}, function(err, data) {
+  if (err) {
+    return alert('There was an error listing your objects: ' + err.message);
+  } else {
+    console.log(data)
+  }
+});
 
-    let parameters = {
-        Bucket: bucket,
-        Key: fileName,
-        Expires: 500,
-        ContentType: fileType,
-        ACL: 'FULL_CONTROL'
-    }
-
-    s3.getSignedUrl('putObject', parameters, (err, data) => {
-        if(err) {
-            console.error(err);
-            res.json({success: false, error: err})
-        }
-        
-        let returnData = {
-            signedRequest: data,
-            url: 'https://tunechains.s3.amazonaws.com/${fileName}'
-        };
-        
-        res.json({success:true, data: {returnData}});
-    })
 }

@@ -1,3 +1,4 @@
+import Upload from '../../client/src/components/Upload/Upload'
 const express = require('express');
 const app = express();
 const multer = require('multer');
@@ -8,7 +9,7 @@ const { Readable } = require('stream');
 require("dotenv").config();
 
 module.exports = function(app) {
-const uri = 'mongodb://tunechains:n9J9LWhZyudl54MlYf4Wg7AhrLP8jiFBHYe7liQx0VrxPrCayCXCCt33BA04jAMx7AT1sj7X76lA6g9rQJVDXg%3D%3D@tunechains.documents.azure.com:10255/?ssl=true';
+const uri = process.env.AZURE_URI;
 let db;
 MongoClient.connect(uri, (err, database) => {
   if (err) {
@@ -23,7 +24,7 @@ trackRoute.get('/:tracks_id', (req, res) => {
   } catch(err) {
     return res.status(400).json({ message: "Invalid trackID in URL parameter. Must be a single String of 12 bytes or a string of 24 hex characters" }); 
   }
-  res.set('content-type', 'audio/mp3');
+  res.set('content-type', 'audio/mpeg');
   res.set('accept-ranges', 'bytes');
 
   let bucket = new mongodb.GridFSBucket(db, {
@@ -47,7 +48,7 @@ trackRoute.get('/:tracks_id', (req, res) => {
 
 trackRoute.post('/tracks', (req, res) => {
   const storage = multer.memoryStorage()
-  const upload = multer({ storage: storage, limits: { fields: 1, fileSize: 6000000, files: 1, parts: 2 }});
+  const upload = multer({ storage: storage, limits: { fields: 1, fileSize: 100000000, files: 1, parts: 2 }});
   upload.single('track')(req, res, (err) => {
     if (err) {
       return res.status(400).json({ message: "Upload Request Validation Failed" });

@@ -43,10 +43,10 @@ class SongData extends Component {
                 </div>
                 <div className="button-toolbar">
                     <ButtonToolbar>
+                    <Upload />
                         {/* <Button variant="success"
                             // onClick={this.handleUpload}
                         > */}
-                            <Upload />
                         {/* <Button variant="secondary">Secondary</Button>
                         <Button variant="warning">Warning</Button>
                         <Button variant="danger">Danger</Button> */}
