@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import Dropzone from '../Dropzone/Dropzone';
+// import Dropzone from '../Dropzone/Dropzone';
 import Progress from '../Progress/Progress';
 import './Upload.css';
 import Sound from 'react-sound';
-// import { AudioUtils } from 'react-native-audio';
-import {AudioRecorder, AudioUtils} from 'react-native-audio';
+import Dropzone from 'react-dropzone-uploader';
 require("dotenv").config();
 
 class Upload extends Component {
@@ -19,7 +18,7 @@ class Upload extends Component {
 
     this.onFilesAdded = this.onFilesAdded.bind(this);
     this.uploadFiles = this.uploadFiles.bind(this);
-    this.sendRequest = this.sendRequest.bind(this);
+    // this.sendRequest = this.sendRequest.bind(this);
     this.renderActions = this.renderActions.bind(this);
   }
 
@@ -107,10 +106,33 @@ class Upload extends Component {
     // return fetch(apiUrl, options);
   }
 
+  Preview = ({ meta }) => {
+    const { name, percent, status } = meta
+    return (
+      <span style={{ alignSelf: 'flex-start', margin: '10px 3%', fontFamily: 'Helvetica' }}>
+        {name}, {Math.round(percent)}%, {status}
+      </span>
+    )
+  }
+
+  getUploadParams = ({ meta }) => {
+    const url = '/tracks'
+    return {url, meta: { fileUrl: `${encodeURIComponent(meta.name)}`}}
+  }
+
+  handleChangeStatus = ({ meta, remove }, status) => {
+    if (status === 'headers_received') {
+      alert(`${meta.name} uploaded!`)
+      remove()
+    } else if (status === 'aborted') {
+      alert(`${meta.name}, upload failed...`)
+    }
+  }
+
     async sendRequest(file) {
     return new Promise((resolve, reject) => {
       const req = new XMLHttpRequest();
-
+      console.log(this.getUploadParams)
       req.upload.addEventListener("progress", event => {
         if (event.lengthComputable) {
           const copy = { ...this.state.uploadProgress };
@@ -135,7 +157,7 @@ class Upload extends Component {
         this.setState({ uploadProgress: copy });
         reject(req.response);
       });
-      const path = 'file://' + AudioUtils.DocumentDirectoryPath + 'test.aac'
+      const path = 'file://' + this.getUploadParams + 'test.aac'
       console.log(path)
       const formData = new FormData();
       console.log(file);
@@ -166,10 +188,19 @@ class Upload extends Component {
       <div className="jumbotron">
         <div className="Content">
           <div>
-            <Dropzone
+            {/* <Dropzone
               onFilesAdded={this.onFilesAdded}
               disabled={this.state.uploading || this.state.successfullUploaded}
-            />
+            /> */}
+            <Dropzone
+      getUploadParams={this.getUploadParams}// specify upload params and url for your files
+      onChangeStatus={this.handleChangeStatus}
+      maxFiles={1}
+        multiple={false}
+        canCancel={false}
+        PreviewComponent={this.Preview}
+      accept="audio/*"
+    />
           </div>
           <div className="Files">
             {this.state.files.map(file => {
