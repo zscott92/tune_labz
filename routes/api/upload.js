@@ -9,7 +9,7 @@ const { Readable } = require('stream');
 require("dotenv").config();
 
 module.exports = function(app) {
-const uri = process.env.AZURE_URI;
+const uri = process.env.AWS_DOCUMENT_DB;
 let db;
 MongoClient.connect(uri, (err, database) => {
   if (err) {
