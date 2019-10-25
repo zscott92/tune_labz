@@ -9,7 +9,7 @@ const { Readable } = require('stream');
 require("dotenv").config();
 
 module.exports = function(app) {
-const uri = process.env.AWS_DOCUMENT_DB;
+const uri = process.env.ATLAS_DB;
 let db;
 MongoClient.connect(uri, (err, database) => {
   if (err) {
@@ -48,7 +48,7 @@ trackRoute.get('/:tracks_id', (req, res) => {
 
 trackRoute.post('/tracks', (req, res) => {
   const storage = multer.memoryStorage()
-  const upload = multer({ storage: storage, limits: { fields: 1, fileSize: 100000000, files: 1, parts: 2 }});
+  const upload = multer({ storage: storage, limits: { fields: 1, fileSize: 1000000000, files: 1, parts: 2 }});
   upload.single('track')(req, res, (err) => {
     if (err) {
       return res.status(400).json({ message: "Upload Request Validation Failed" });

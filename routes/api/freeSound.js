@@ -1,32 +1,26 @@
+require("dotenv").config();
+const AWS = require('aws-sdk');
 
-const http = require("https");
-module.exports = app.get("/api/freesound/:options", http.request(options, function (res) {
-    var chunks = [];
+const s3 = new AWS.S3({
+    region : process.env.AWS_REGION
+  });
 
-    res.on("data", function (chunk) {
-        chunks.push(chunk);
-    });
+module.exports = function(app) {
 
-    res.on("end", function () {
-        var body = Buffer.concat(chunks);
-        console.log(body.toString());
-    });
-    req.end();
-}));
+   app.get('/song_id', function(req,res){
+    try {
+        var trackID = new ObjectID(req.params.trackID);
+      } catch(err) {
+        return res.status(400).json({ message: "Invalid trackID in URL parameter. Must be a single String of 12 bytes or a string of 24 hex characters" }); 
+      }
+      res.set('content-type', 'audio/mpeg');
+      res.set('accept-ranges', 'bytes');
 
-
-let query = "/apiv2/sounds/" + jsonPath(song, "$..id").toJSONString();
-let analysis = analysis(query);
-var req = app.get("/api/freesound/:analysis", http.request(analysis, function (res) {
-    var chunks = [];
-
-    res.on("data", function (chunk) {
-        chunks.push(chunk);
-    });
-
-    res.on("end", function () {
-        var body = Buffer.concat(chunks);
-        console.log(body.toString());
-    });
-    req.end();
-}));
+       let audioStream = s3.getObject({
+         Bucket: process.env.AWS_BUCKET,
+         Key: 'myimage.jpg'
+       }).createReadStream();
+    
+     audioStream.pipe(res);
+   });
+}
