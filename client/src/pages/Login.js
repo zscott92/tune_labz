@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import { GoogleLogin } from 'react-google-login';
-import config from '../config.json';
 import GoogleLogin from '../components/GoogleLogin/GoogleLogin'
 import GithubLogin from '../components/GithubLogin/GithubLogin'
 // import { storage } from "googleapis/build/src/apis/storage";
@@ -19,8 +17,8 @@ class Login extends Component {
                     <p className="lead">Our application allows users to share and collaborate music projects,
                     edit them on  their local computer, and upload the remixed file back to the project file.</p>
                     <div>
-                <Google Login />
-                <Github Login />
+                <GoogleLogin />
+                <GithubLogin />
                 <div>
                     {}
                 </div>

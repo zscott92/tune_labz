@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 import { BrowserRouter as Router, Route,} from "react-router-dom";
-import { Stitch, GoogleRedirectCredential, UserPasswordCredential} from 'mongodb-stitch-browser-sdk';
-import {AwsServiceClient, AwsRequest} from 'mongodb-stitch-browser-services-aws';
+import { Stitch} from 'mongodb-stitch-browser-sdk';
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import Nav from "./components/Nav";
@@ -22,7 +21,6 @@ class App extends Component {
     }
     }
     render() {
-        const authorized = this.state;
     return (
         <Router>
             <div>

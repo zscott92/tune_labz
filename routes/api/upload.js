@@ -1,18 +1,15 @@
-// import Upload from '../../client/src/components/Upload/Upload';
+
 import Models from '../../models';
-// const express = require('express');
-// const app = express();
-// const multer = require('multer');
-// const mongodb = require('mongodb');
-// const MongoClient = require('mongodb').MongoClient;
-// var mongoose = require('mongoose');
-// var grid = require('gridfs-stream');
-// var fs = require('fs');
-// const ObjectID = require('mongodb').ObjectID;
-// const { Readable } = require('stream');
-// require("dotenv").config();
-module.exports = function(router){
-router.post("/add", (req, res, next) => {
+const express = require('express');
+const app = express();
+const mongodb = require('mongodb');
+const MongoClient = require('mongodb').MongoClient;
+var mongoose = require('mongoose');
+var fs = require('fs');
+const ObjectID = require('mongodb').ObjectID;
+
+module.exports = function(app){
+app.post("/add", (req, res, next) => {
  
   const track = new User({
       _id: mongoose.Types.ObjectId(),
@@ -38,7 +35,7 @@ router.post("/add", (req, res, next) => {
   });
 });
 
-router.post("/delete", (req, res, next) => {
+app.post("/delete", (req, res, next) => {
   const rid = req.body.id;
 
   User.findById(rid)
@@ -54,7 +51,7 @@ router.post("/delete", (req, res, next) => {
       });
 });
 
-router.get("/list", (req, res, next) => {
+app.get("/list", (req, res, next) => {
   User.find({})
       .exec()
       .then(docs => {

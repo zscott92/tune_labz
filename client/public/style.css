@@ -2,6 +2,7 @@ body {
     font-family: 'Oxygen Mono', sans-serif;
     min-height: 100%;
     background-color: #363636;
+    color: white;
 }
 html {
     height: 100%;

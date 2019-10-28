@@ -1,6 +1,4 @@
 import React, {Component} from "react";
-import { Link } from "react-router-dom";
-import axios from 'axios';
 
 export default class Nav extends Component {
   constructor() {
@@ -8,24 +6,8 @@ export default class Nav extends Component {
     this.logout = this.logout.bind(this)
   }
 
-  logout(event) {
-    event.preventDefault()
-    console.log('logging out')
-    axios.post('/user/logout').then(response => {
-      console.log(response.data)
-      if (response.status === 200) {
-        this.props.updateUser({
-          loggedIn: false,
-          username: null
-        })
-      }
-    }).catch(error => {
-      console.log('Logout error')
-    })
-  }
 
   render() {
-    const loggedIn = this.props.loggedIn;
     console.log('navbar render, props: ')
     console.log(this.props);
 
