@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class AudioVisualiser extends Component {
+class AudioVisuals extends Component {
     render() {
         return <canvas width="300" height="300" />;
     }
