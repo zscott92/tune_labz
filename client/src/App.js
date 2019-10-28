@@ -10,7 +10,7 @@ import Footer from "./components/Footer/Footer";
 class App extends Component {
     constructor(props) {
         super(props)
-        this.appId =  props.appId;
+        this.appId = 'tune_labz-lxewc';
         this.client = Stitch.initializeAppClient(this.appId)
     
 

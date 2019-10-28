@@ -1,15 +1,15 @@
 require("dotenv").config();
 const express = require("express");
 const cookieParser = require('cookie-parser');
-const routes = require("./routes");
+const upload = require("./routes/api/upload");
 const PORT = process.env.PORT || 3001;
 const app = express();
 const multer = require('multer')
-// const tracks = require('./routes/api/upload');
+
 const trackRoute = express.Router();
 const path = require('path');
 const AWS = require('aws-sdk')
-var busboy = require("connect-busboy");
+
 var s3router= require('react-dropzone-s3-uploader');
 
 
@@ -17,14 +17,13 @@ var s3router= require('react-dropzone-s3-uploader');
 // const MongoClient = require('mongodb').MongoClient;
 // const ObjectID = require('mongodb').ObjectID;
 // const { Readable } = require('stream');
-const db = require("./models");
+const db = require("./models/track");
 
 
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.json());
-app.engine('html', require('ejs').renderFile);
-app.use(routes);
+app.use(upload);
 
 
 // Serve up static assets (usually on heroku)

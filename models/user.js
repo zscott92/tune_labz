@@ -4,13 +4,12 @@ const Schema = mongoose.Schema;
 
 const userSchema = new mongoose.Schema({
     _id: {
-        type: Integer,
+        type: Number,
         required: true,
     },
     email: {
         type: String,
         required: true,
-        unique: true,
         lowercase: true,
         validate: (value) => {
             return validator.isEmail(value)
@@ -19,7 +18,6 @@ const userSchema = new mongoose.Schema({
         username: {
             type: String,
             required: true,
-            unique: true,
         },
         password: {
             type: String,
@@ -37,8 +35,9 @@ const userSchema = new mongoose.Schema({
         },
         country: String,
         age: {
-            type: Integer,
+            type: Number,
             required: true,
-    })
+    }
+})
 
 module.exports = mongoose.model('User', userSchema);

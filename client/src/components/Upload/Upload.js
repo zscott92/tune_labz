@@ -28,8 +28,7 @@ class Upload extends Component {
     this.client = Stitch.initializeAppClient(this.appId);
     this.aws = this.client.getServiceClient(AwsServiceClient.factory, 'AWS')
     return new Promise((resolve, reject) => {
-      if (this.src.type.match(/audio.*/) ||
-        this.src.type.match(/video\/ogg/)) {
+      if (this.src.type.match(/audio.*/)) {
         const fr = new FileReader();
 
         fr.readAsArrayBuffer(this.src);

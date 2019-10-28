@@ -1,4 +1,5 @@
 var Twitter = require('twitter');
+module.exports = function twitter() {
 
 var client = new Twitter({
     consumer_key: process.env.TWITTER_CONSUMER_KEY,
@@ -25,3 +26,4 @@ client.stream('statuses/filter', {track: 'javascript'}, function(stream) {
     throw error;
   });
 });
+}
