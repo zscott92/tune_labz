@@ -1,12 +1,28 @@
-import React from "react";
+import React, {Component} from "react";
 import { BrowserRouter as Router, Route,} from "react-router-dom";
+import { Stitch, GoogleRedirectCredential, UserPasswordCredential} from 'mongodb-stitch-browser-sdk';
+import {AwsServiceClient, AwsRequest} from 'mongodb-stitch-browser-services-aws';
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import Nav from "./components/Nav";
 import Wrapper from "./components/Wrapper";
 import Footer from "./components/Footer/Footer";
 
-function App() {
+class App extends Component {
+    constructor(props) {
+        super(props)
+        this.appId =  props.appId;
+        this.client = Stitch.initializeAppClient(this.appId)
+    
+
+    const authorized = this.client.auth.isLoggedIn
+
+    this.state = {
+        authorized
+    }
+    }
+    render() {
+        const authorized = this.state;
     return (
         <Router>
             <div>
@@ -21,6 +37,7 @@ function App() {
             </div>
         </Router>
     );
+    }
 }
     
 export default App;

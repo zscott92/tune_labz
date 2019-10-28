@@ -1,82 +1,70 @@
-import Upload from '../../client/src/components/Upload/Upload'
-const express = require('express');
-const app = express();
-const multer = require('multer');
-const mongodb = require('mongodb');
-const MongoClient = require('mongodb').MongoClient;
-const ObjectID = require('mongodb').ObjectID;
-const { Readable } = require('stream');
-require("dotenv").config();
+// import Upload from '../../client/src/components/Upload/Upload';
+import Models from '../../models';
+// const express = require('express');
+// const app = express();
+// const multer = require('multer');
+// const mongodb = require('mongodb');
+// const MongoClient = require('mongodb').MongoClient;
+// var mongoose = require('mongoose');
+// var grid = require('gridfs-stream');
+// var fs = require('fs');
+// const ObjectID = require('mongodb').ObjectID;
+// const { Readable } = require('stream');
+// require("dotenv").config();
+module.exports = function(router){
+router.post("/add", (req, res, next) => {
+ 
+  const track = new User({
+      _id: mongoose.Types.ObjectId(),
+      firstname: req.body.firstname,
+      lastname: req.body.lastname,
+      email: req.body.email,
+      username: req.body.username,
+      password: req.body.password,
+      firstname: req.body.firstname,
+      lastname: req.body.lastname,
+      country: req.body.country,
+      age: req.body.age,
+  })
 
-module.exports = function(app) {
-const uri = process.env.ATLAS_DB;
-let db;
-MongoClient.connect(uri, (err, database) => {
-  if (err) {
-    console.log('error. Please make sure that MongoDB is running.');
-    process.exit(1);
-  }
-  db = database;
-});
-trackRoute.get('/:tracks_id', (req, res) => {
-  try {
-    var trackID = new ObjectID(req.params.trackID);
-  } catch(err) {
-    return res.status(400).json({ message: "Invalid trackID in URL parameter. Must be a single String of 12 bytes or a string of 24 hex characters" }); 
-  }
-  res.set('content-type', 'audio/mpeg');
-  res.set('accept-ranges', 'bytes');
-
-  let bucket = new mongodb.GridFSBucket(db, {
-    bucketName: 'tracks'
-  });
-
-  let downloadStream = bucket.openDownloadStream(trackID);
-
-  downloadStream.on('data', (chunk) => {
-    res.write(chunk);
-  });
-
-  downloadStream.on('error', () => {
-    res.sendStatus(404);
-  });
-
-  downloadStream.on('end', () => {
-    res.end();
+  user.save()
+  .then(result => {
+      res.status(200).json({
+          docs:[user]
+      });
+  })
+  .catch(err => {
+      console.log(err);
   });
 });
 
-trackRoute.post('/tracks', (req, res) => {
-  const storage = multer.memoryStorage()
-  const upload = multer({ storage: storage, limits: { fields: 1, fileSize: 1000000000, files: 1, parts: 2 }});
-  upload.single('track')(req, res, (err) => {
-    if (err) {
-      return res.status(400).json({ message: "Upload Request Validation Failed" });
-    } else if(!req.body.name) {
-      return res.status(400).json({ message: "No track name in request body" });
-    }
-    
-    let trackName = req.body.name;
+router.post("/delete", (req, res, next) => {
+  const rid = req.body.id;
 
-    const readableTrackStream = new Readable();
-    readableTrackStream.push(req.file.buffer);
-    readableTrackStream.push(null);
+  User.findById(rid)
+      .exec()
+      .then(docs => {
+          docs.remove();
+          res.status(200).json({
+              deleted:true
+          });
+      })
+      .catch(err => {
+          console.log(err)
+      });
+});
 
-    let bucket = new mongodb.GridFSBucket(db, {
-      bucketName: 'tracks'
-    });
-
-    let uploadStream = bucket.openUploadStream(trackName);
-    let id = uploadStream.id;
-    readableTrackStream.pipe(uploadStream);
-
-    uploadStream.on('error', () => {
-      return res.status(500).json({ message: "Error uploading file" });
-    });
-
-    uploadStream.on('finish', () => {
-      return res.status(201).json({ message: "File uploaded successfully, stored under Mongo ObjectID: " + id });
-    });
-  });
+router.get("/list", (req, res, next) => {
+  User.find({})
+      .exec()
+      .then(docs => {
+          res.status(200).json({
+              docs
+          });
+      })
+      .catch(err => {
+          console.log(err)
+      });
 });
 }
+  

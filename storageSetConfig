@@ -1,0 +1,22 @@
+use admin;
+db.runCommand( { "storageSetConfig": {
+  "stores": [{
+    "s3": {
+      "name": "trackdata",           // Creates an S3 store
+
+      "region":"us-east-1",  // Update with the bucket region code
+
+      "bucket": "tunechains"    // Update with your bucket name
+
+    }
+  }],
+  "databases": {
+    "songSchema": {                    // Creates a database named sample
+      "*": [{                      /* Works with the defintion to create a
+                                      collection the data in each directory */
+        "store": "trackdata",        // Links to the S3 store above
+        "definition": "/tracks/{collectionName()}"
+      }]
+    }
+  }
+}})
