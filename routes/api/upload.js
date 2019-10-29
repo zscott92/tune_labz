@@ -1,21 +1,20 @@
 
 const express = require('express');
-const app = express();
 const mongodb = require('mongodb');
 const MongoClient = require('mongodb').MongoClient;
 var mongoose = require('mongoose');
 var fs = require('fs');
 const ObjectID = require('mongodb').ObjectID;
+const router = express.Router();
 
-module.exports = function (app) {
-    app.post("/addTrack", (req, res, next) => {
+module.exports = 
+    router.post("/addTrack", (req, res, next) => {
 
-        const track = new Track({
-            _id: mongoose.Types.ObjectId(),
-            owner: [req.props.owner],
-            trackInfo: [req.props.track],
-            childid: [childTrack],
-        })
+        // const track = new trackSchema({
+        //     owner: [req.props.owner],
+        //     trackInfo: [req.props.track],
+        //     childid: [childTrack],
+        // })
 
     track.save()
         .then(result => {
@@ -28,7 +27,7 @@ module.exports = function (app) {
         })
     });
 
-app.post("/delete", (req, res, next) => {
+router.post("/delete", (req, res, next) => {
     const rid = req.body.id;
 
     track.findById(rid)
@@ -44,7 +43,7 @@ app.post("/delete", (req, res, next) => {
         });
 });
 
-app.get("/list", (req, res, next) => {
+router.get("/list", (req, res, next) => {
     track.find({})
         .exec()
         .then(docs => {
@@ -56,5 +55,5 @@ app.get("/list", (req, res, next) => {
             console.log(err)
         });
 })
-}
+
 

@@ -9,21 +9,31 @@ const multer = require('multer')
 const trackRoute = express.Router();
 const path = require('path');
 const AWS = require('aws-sdk')
+const api = express();
 
 var s3router= require('react-dropzone-s3-uploader');
 
 
-// const mongodb = require('mongodb');
-// const MongoClient = require('mongodb').MongoClient;
+const mongodb = require('mongodb');
+const MongoClient = require('mongodb').MongoClient;
 // const ObjectID = require('mongodb').ObjectID;
 // const { Readable } = require('stream');
-const db = require("./models/track");
 
 
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.json());
-app.use(upload);
+app.use(upload, trackRoute);
+app.use('/api/v1/', api);
+
+let db;
+MongoClient.connect(process.env.ATLAS_DB, (err, database) => {
+  if (err) {
+    console.log('MongoDB Connection Error. Please make sure that MongoDB is running.');
+    process.exit(1);
+  }
+  db = database;
+});
 
 
 // Serve up static assets (usually on heroku)

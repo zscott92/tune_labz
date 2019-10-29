@@ -4,11 +4,15 @@
   "private": true,
   "proxy": "http://localhost:3001/",
   "dependencies": {
-    "aws-sdk": "^2.555.0",
+    "@react-native-community/cli": "^2.9.0",
+    "audio-decode": "^1.4.0",
+    "aws-sdk": "^2.557.0",
     "axios": "^0.19.0",
     "expo-av": "^7.0.1",
     "freesound-client": "^0.0.1",
+    "music-metadata": "^4.8.2",
     "path": "^0.12.7",
+    "prop-types": "^15.7.2",
     "ramda": "^0.26.1",
     "react": "^16.9.0",
     "react-bootstrap": "^1.0.0-beta.12",
@@ -17,10 +21,12 @@
     "react-google-login-component": "^0.9.3",
     "react-native": "^0.61.2",
     "react-native-audio": "^4.3.0",
+    "react-native-cli": "^2.0.1",
     "react-native-fetch-blob": "^0.10.8",
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.1.1",
-    "react-simple-tree-menu": "^1.1.5"
+    "react-simple-tree-menu": "^1.1.5",
+    "util": "^0.12.1"
   },
   "scripts": {
     "start": "react-scripts start",
