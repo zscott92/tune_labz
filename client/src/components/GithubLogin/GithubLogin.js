@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import GitHubLogin from 'react-github-login';
 
-function GitHubLogin() {
+export default function GitHub() {
     const onSuccess = response => console.log(response);
   const onFailure = response => console.error(response);
    

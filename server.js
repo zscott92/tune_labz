@@ -9,22 +9,23 @@ const multer = require('multer')
 const trackRoute = express.Router();
 const path = require('path');
 const AWS = require('aws-sdk')
-var busboy = require("connect-busboy");
+// var busboy = require("connect-busboy");
 var s3router= require('react-dropzone-s3-uploader');
-
+const upload = require('./s3lamda');
 
 // const mongodb = require('mongodb');
 // const MongoClient = require('mongodb').MongoClient;
 // const ObjectID = require('mongodb').ObjectID;
 // const { Readable } = require('stream');
-const db = require("./models");
+// const db = require("./models");
 
 
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.json());
-app.engine('html', require('ejs').renderFile);
-app.use(routes);
+app.use(upload);
+// app.engine('html', require('ejs').renderFile);
+// app.use(routes);
 
 
 // Serve up static assets (usually on heroku)

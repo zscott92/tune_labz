@@ -1,131 +1,60 @@
 import React, { Component } from 'react';
-// import Dropzone from '../Dropzone/Dropzone';
-import Progress from '../Progress/Progress';
 import 'react-dropzone-uploader/dist/styles.css'
 import Dropzone from 'react-dropzone-uploader';
-import { Stitch } from 'mongodb-stitch-server-sdk';
-import {AwsServiceClient, AwsRequest} from 'mongodb-stitch-browser-services-aws';
-import RNFetchBlob from 'react-native-fetch-blob'
-import db from '../../../../config/db'
+import AWS from 'aws-sdk';
+var s3 = new AWS.S3();
+
 require("dotenv").config()
 
 class Upload extends Component {
-  constructor(props) {
-    super(props)
-    this.appId = props.appId;
-  
-  }
-  
-  async getUploadParams ({ meta }) {
-    this.client = Stitch.initializeAppClient(this.appId);
-    this.aws = this.client.getServiceClient(AwsServiceClient.factory, 'AWS')
-    let file = meta;
-    const bucket = 'tunechains';
-    const url = `http://${bucket}.s3.amazonaws.com/${encodeURIComponent(meta.name)}`
-    return ({ url, meta: { fileUrl: `${url}/${encodeURIComponent(meta.name)}`}})
+  constructor() {
+    super()
+    this.state = { file: undefined }
+    this.getUploadParams = this.getUploadParams.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  import Loader from './Loader';
-
-export default class extends Loader {
-
-  load() {
-    this.client = Stitch.initializeAppClient(this.appId);
-    this.aws = this.client.getServiceClient(AwsServiceClient.factory, 'AWS')
-    return new Promise((resolve, reject) => {
-      if (this.src.type.match(/audio.*/) ||
-        this.src.type.match(/video\/ogg/)) {
-        const fr = new FileReader();
-
-        fr.readAsArrayBuffer(this.src);
-
-        fr.addEventListener('progress', (e) => {
-          super.fileProgress(e);
-        });
-
-        fr.addEventListener('load', (e) => {
-          const decoderPromise = super.fileLoad(e);
-
-          decoderPromise.then((audioBuffer) => {
-            const key = `${this.client.auth.user.id}-${meta.name}`
-      const args = {
-        ACL: 'public-read',
-        Bucket: 'tunechains',
-        ContentType: "audio/mpeg",
-        Key: key,
-        Body: result
-      }
- 
-      const request = new AwsRequest.Builder()
-        .withService('s3')
-        .withAction('PutObject')
-        .withRegion('us-east-1')
-        .withArgs(args)
-        .build()
- 
-      let result = this.aws.execute(request)
-    
-            resolve(audioBuffer);
-          });
-        });
-
-        fr.addEventListener('error', (err) => {
-          reject(err);
-        })
-        .then(result => {
-          const tracks = this.mongodb.db('data').collection('picstream')
-          return tracks.insertOne({
-            owner_id: this.client.auth.user.id,
-            db,
-            file: {
-              name: meta.name,
-              type: meta.type
-            },
-            ETag: result.ETag,
-            ts: new Date()
-          })
-        })
-        .then(result => {
-          this.getEntries()
-        })
-      } else {
-        reject(Error(`Unsupported file type ${this.src.type}`));
-      }
-    });
+  handleChangeStatus = ({ meta }, status) => {
+    console.log(status, meta)
   }
-}
 
-  async transferData({meta}) {
-    
+  handleSubmit = (files, allFiles) => {
+    console.log(files.map(f => f.meta))
+    allFiles.forEach(f => f.remove())
+  }
 
+  getUploadParams = async ({ meta }) => {
+      const url = '/upload'
+      return { url, meta: { fileUrl: `${url}/${encodeURIComponent(meta.name)}` } }
+    }
+
+
+        uploadReadableStream = async (stream) => {
+          const params = {Bucket: 'tunechains', Key: stream, Body: stream.patientfile.path.buffer};
+          return s3.upload(params).promise();
+        }
+        
+        upload = async () => {
+          const readable = this.getUploadParams();
+          console.log(readable)
+          const results = await this.uploadReadableStream(readable);
+          console.log('upload complete', results);
+        }
   
-
- handleChangeStatus = ({ meta }, status) => {
-  console.log(status, meta)
-}
-
-handleSubmit = (files, allFiles) => {
-  console.log(files.map(f => f.meta))
-  allFiles.forEach(f => f.remove())
-}
 
   render() {
-    
     return (
       <Dropzone
         getUploadParams={this.getUploadParams}
         onChangeStatus={this.handleChangeStatus}
         onSubmit={this.handleSubmit}
-        PreviewComponent={this.CustomPreview}
-        maxFiles={1}
-        multiple={false}
-        canCancel={false}
         accept="audio/*"
-        inputLabel= "Upload"
-        inputContent="Upload -- click or drag audio file"
-        inputContent={(files, extra) => (extra.reject ? 'Audio Files Only' : 'Drag Files')}
-        styles={{ dropzone: { minHeight: 200, maxHeight: 250 },
-      }}
+        inputContent={(files, extra) => (extra.reject ? 'Image, audio and video files only' : 'Drag Files')}
+        canRemove={true}
+        styles={{
+          dropzoneReject: { borderColor: 'red', backgroundColor: '#DAA' },
+          inputLabel: (files, extra) => (extra.reject ? { color: 'red' } : {}),
+        }}
       />
     )
   }
