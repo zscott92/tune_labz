@@ -1,116 +1,93 @@
 import React, { Component } from 'react';
-import 'react-dropzone-uploader/dist/styles.css'
-import Dropzone from 'react-dropzone-uploader';
-import AWS from 'aws-sdk';
-var s3 = new AWS.S3();
+import axios from 'axios';
+import DisplayImage from '../DisplayImage/DisplayImage'
+import './Upload.css'
 
-require("dotenv").config()
+export default class Uploader extends Component {
+  state = {
+    message:''
+  };
 
-class Upload extends Component {
-  constructor() {
-    super()
-    this.state = { file: undefined }
-    this.getUploadParams = this.getUploadParams.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
-  }
-
-  handleChangeStatus = ({ meta }, status) => {
-    console.log(status, meta)
-  }
-
-<<<<<<< HEAD
-  handleSubmit = (files, allFiles) => {
-    console.log(files.map(f => f.meta))
-    allFiles.forEach(f => f.remove())
-  }
-
-  getUploadParams = async ({ meta }) => {
-      const url = '/upload'
-      return { url, meta: { fileUrl: `${url}/${encodeURIComponent(meta.name)}` } }
+  getAudio = e => {
+    const files = e.target.files;
+    if (files && files.length > 0) {
+      const file = files[0];
+      this.setState({ file });
     }
+  };
 
+  uploadFile = e => {
+    e.preventDefault();
+    const { file } = this.state;
+    this.setState({message:'Uploading...'})
+    const contentType = file.type; // eg. image/jpeg or image/svg+xml
 
-=======
-  handleSubmit(files, allFiles) {
-    console.log(files.map(f => f.meta))
-    allFiles.forEach(f => f.remove())
-    this.setState({ file: undefined })
-    this.getUploadParams = this.getUploadParams.bind(this);
-  }
-
-    getUploadParams = async ({meta}, e) =>  {
-      this.setState({ file: e.target.files[0] });
-      file.src = URL.createObjectURL({'file': this.state});
-      const url = file.src;
-      const uri = { url, meta: { fileUrl: `${url}/${encodeURIComponent(meta.name)}` }}
-        const fila = (({ name }) => ({ name }))(meta);
-        console.log(fila)
-        var values = Object.keys(fila).map(function (key) { return file[key]; });
-        console.log(values)
-        var cleanFile = values[0];
-        let fi = JSON.stringify(cleanFile);
-        console.log(fi);
-        let trimmedFile = fi.substr(fi.slice(".",-1));
-        let trim = trimmedFile.replace(/['"]+/g, '')
-        console.log(trim)
-        uri.arrayBuffer().then(buf => {
-          const file = new File([buf], trim, { type: 'image/aac' })
-          this.setState({ file })
-         })
-        const formData = new FormData()
-        formData.append('file', {
-          uri: uri,
-          name: `file://${trim}/test.aac`,
-          type: 'audio/aac',
-        })
-        console.log(formData)
-        let stream = this.uploadReadableStream('file', formData)
-        console.log(stream)
-        return stream;
+    const generatePutUrl = 'http://localhost:3500/generate-put-url';
+    const options = {
+      params: {
+        Key: file.name,
+        ContentType: contentType
+      },
+      headers: {
+        'Content-Type': contentType
       }
->>>>>>> ff032e180d319352dd7abab8c7fa67aca64ec636
-        uploadReadableStream = async (stream) => {
-          const params = {Bucket: 'tunechains', Key: stream, Body: stream.patientfile.path.buffer};
-          return s3.upload(params).promise();
-        }
-        
-        upload = async () => {
-          const readable = this.getUploadParams();
-          console.log(readable)
-          const results = await this.uploadReadableStream(readable);
-          console.log('upload complete', results);
-        }
-  
+    };
+
+    axios.get(generatePutUrl, options).then(res => {
+      const {
+        data: { putURL }
+      } = res;
+      axios
+        .put(putURL, file, options)
+        .then(res => {
+          this.setState({message:'Upload Successful'})
+          setTimeout(()=>{
+            this.setState({message:''});
+            document.querySelector('#upload-image').value='';
+          }, 2000)
+        })
+        .catch(err => {
+          this.setState({message:'Sorry, something went wrong'})
+          console.log('err', err);
+        });
+    });
+  };
 
   render() {
     return (
-      <Dropzone
-        getUploadParams={this.getUploadParams}
-        onChangeStatus={this.handleChangeStatus}
-        onSubmit={this.handleSubmit}
-<<<<<<< HEAD
-        accept="audio/*"
-        inputContent={(files, extra) => (extra.reject ? 'Image, audio and video files only' : 'Drag Files')}
-        canRemove={true}
-        styles={{
-          dropzoneReject: { borderColor: 'red', backgroundColor: '#DAA' },
-          inputLabel: (files, extra) => (extra.reject ? { color: 'red' } : {}),
-        }}
-=======
-        PreviewComponent={this.CustomPreview}
-        maxFiles={1}
-        accept="audio/*"
-        inputLabel="Upload"
-        styles={{
-          dropzone: { minHeight: 200, maxHeight: 250 },
-        }}
-        s3={
-          this.s3
-        }
->>>>>>> ff032e180d319352dd7abab8c7fa67aca64ec636
-      />
-    )
+      <React.Fragment>
+        <h1>Upload an image to AWS S3 bucket</h1>
+        {/* <input
+          id='upload-image'
+          type='file'
+          accept='audio/*'
+          onChange={this.getImage}
+        /> */}
+        {/* <div
+        className={`Dropzone ${this.state.hightlight ? 'Highlight' : ''}`}
+        onDragOver={this.onDragOver}
+        onDragLeave={this.onDragLeave}
+        onDrop={this.onDrop}
+        onClick={this.openFileDialog}
+        style={{ cursor: this.props.disabled ? 'default' : 'pointer' }}
+      > */}
+        <input
+          id='upload-image'
+          type='file'
+          accept='audio/*'
+          onChange={this.getAudio}
+        />
+        {/* <img
+          alt="upload"
+          className="Icon"
+          src="baseline-cloud_upload-24px.svg"
+        /> */}
+      {/* </div> */}
+        <p>{this.state.message}</p>
+        <form onSubmit={this.uploadFile}>
+          <button id='file-upload-button'>Upload</button>
+        </form>
+      </React.Fragment>
+    );
   }
 }
-
-export default Upload;
