@@ -1,5 +1,8 @@
 import React, { Component } from "react";
+<<<<<<< HEAD
 import config from '../config.json';
+=======
+>>>>>>> ff032e180d319352dd7abab8c7fa67aca64ec636
 import GoogleLogin from '../components/GoogleLogin/GoogleLogin'
 import GithubLogin from '../components/GithubLogin/GithubLogin'
 // import { storage } from "googleapis/build/src/apis/storage";

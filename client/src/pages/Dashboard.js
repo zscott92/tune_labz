@@ -22,12 +22,12 @@ class Dashboard extends Component {
   };
 
   componentDidMount() {
-    API.getUserSongs(1).then(dbData => {
-      console.log(dbData)
-      this.setState({
-        data: dbData.data
-      })
-    });
+    // API.getUserSongs(1).then(dbData => {
+    //   console.log(dbData)
+    //   this.setState({
+    //     data: dbData.data
+    //   })
+    // });
   }
 
   handleClick = song => {

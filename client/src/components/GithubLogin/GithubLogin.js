@@ -1,7 +1,6 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import GitHubLogin from 'react-github-login';
+import React, {Component} from "react";
 
+<<<<<<< HEAD
 export default function GitHub() {
     const onSuccess = response => console.log(response);
   const onFailure = response => console.error(response);
@@ -12,3 +11,24 @@ export default function GitHub() {
       onFailure={onFailure}/>
     )
   }
+=======
+  
+
+class GitHubLogin extends Component {
+  state = {
+    token: null
+  };
+  
+    render() {
+      return(
+      <a
+      href={"/home"}
+    >
+      Login
+    </a>
+      )
+  }
+}
+  
+  export default GitHubLogin;
+>>>>>>> ff032e180d319352dd7abab8c7fa67aca64ec636

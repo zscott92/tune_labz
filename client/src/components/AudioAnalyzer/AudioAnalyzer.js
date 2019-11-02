@@ -28,8 +28,8 @@ class AudioAnalyser extends Component {
     this.analyser.disconnect();
     this.source.disconnect();
   }
-  render() {
-    return <textarea value={this.state.audioData} />;
+    render() {
+        return <AudioVisualiser audioData={this.state.audioData} />;
   }
  
 }
