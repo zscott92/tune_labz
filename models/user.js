@@ -1,6 +1,19 @@
+require('dotenv').config();
 const mongoose = require('mongoose');
 const validator = require('validator');
 const Schema = mongoose.Schema;
+const async = require('async');
+const uri = process.env.ATLAS_DB;
+const options = { use: MongoClient };
+
+mongoose.Promise = global.Promise;
+mongoose.set('debug', true);
+
+module.exports = 
+    function autoPopulateSubs(next) {
+    this.populate('subs');
+    next();
+}
 
 const userSchema = new mongoose.Schema({
     _id: {
@@ -15,29 +28,38 @@ const userSchema = new mongoose.Schema({
             return validator.isEmail(value)
         }
     },
-        username: {
-            type: String,
-            required: true,
-        },
-        password: {
-            type: String,
-            required: true,
-            minlength: 8,
-            maxlength: 16,
-        },
-        firstname: {
-            type: String,
-            required: true,
-        },
-        lastname: {
-            type: String,
-            required: true,
-        },
-        country: String,
-        age: {
-            type: Number,
-            required: true,
+    username: {
+        type: String,
+        required: true,
+    },
+    password: {
+        type: String,
+        required: true,
+        minlength: 8,
+        maxlength: 16,
+    },
+    firstname: {
+        type: String,
+        required: true,
+    },
+    lastname: {
+        type: String,
+        required: true,
+    },
+    country: String,
+    age: {
+        type: Number,
+        required: true,
     }
 })
 
-module.exports = mongoose.model('User', userSchema);
+userSchema
+    .pre('findOne', autoPopulateSubs)
+    .pre('find', autoPopulateSubs);
+
+
+const user = mongoose.model('user', userSchema);
+
+function log(data) {
+    console.log(JSON.stringify(data, undefined, 2))
+}

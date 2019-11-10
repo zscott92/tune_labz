@@ -5,19 +5,13 @@ const PORT = process.env.PORT || 3500;
 const app = express();
 const multer = require('multer')
 const cors = require('cors')
-
 const trackRoute = express.Router();
 const path = require('path');
 const AWS = require('aws-sdk')
-// var busboy = require("connect-busboy");
 var s3router= require('react-dropzone-s3-uploader');
-// const upload = require('./s3lamda');
-
 const mongodb = require('mongodb');
 const MongoClient = require('mongodb').MongoClient;
-// const ObjectID = require('mongodb').ObjectID;
-// const { Readable } = require('stream');
-// const db = require("./models");
+
 
 
 app.use(express.urlencoded({ extended: true }));

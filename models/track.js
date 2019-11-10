@@ -13,13 +13,13 @@ console.log("DB Connection Error: ${err.message}");
 });
 
 const childTrack = new mongoose.Schema({
-    owner: [{ type: String, ref: 'Comment' }],
+    owner: [{ type: String, ref: 'Login' }],
     trackInfo: [{
         type: String
     }],
 })
     const trackSchema = new mongoose.Schema({
-        owner: [{ type: String, ref: 'Comment' }],
+        owner: [{ type: String, ref: 'Login' }],
         trackInfo: [{
             type: String
         }],
