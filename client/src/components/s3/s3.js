@@ -21,4 +21,3 @@ s3 = (filePath, bucketName, key) => {
     });
   });
 };
-}

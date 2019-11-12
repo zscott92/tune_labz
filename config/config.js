@@ -1,26 +1,18 @@
 module.exports = {
-  "development": {
-    "username": process.env.DEV_USERNAME,
-    "password": process.env.DEV_PASSWORD,
-    "database": process.env.DEV_DATABASE,
-    "host": process.env.DEV_HOST,
-    "port": process.env.DEV_PORT,
-    "dialect": "mysql"
-  },
-  "test": {
-    "username": "root",
-    "password": "null",
-    "database": "database_test",
-    "host": "127.0.0.1",
-    "port": 3306,
-    "dialect": "mysql"
-  },
-  "production": {
-    "username": "root",
-    "password": null,
-    "database": "database_production",
-    "host": "127.0.0.1",
-    "port": 3306,
-    "dialect": "mysql"
-  }
-}
+    local_storage_key: 'node-react-aws-dynamodb',
+    aws_user_table_name: 'usersTab',
+    aws_user_session_table_name: 'userSessionsTab',
+    aws_table_name: 'fruitsTab',
+    aws_local_config: {
+      region: 'local',
+      endpoint: 'http://localhost:8000'
+    },
+    aws_remote_config: {
+      accessKeyId: 'AKIAIUXYLG6JTPS2MQFQ',
+      secretAccessKey: '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',
+      region: 'us-east-1',
+    },
+    github_client_id: 'ba16139196a8a8c86cb4',
+    github_client_secret: '5f516ced613cd8f8f9a69b1bcdc488c3f5c8e3fa',
+    github_scope: 'user'
+};

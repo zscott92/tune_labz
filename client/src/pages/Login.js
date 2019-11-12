@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import config from '../config.json';
 import GoogleLogin from '../components/GoogleLogin/GoogleLogin'
 import GithubLogin from '../components/GithubLogin/GithubLogin'
+import FacebookLogin from '../components/FacebookLogin/FacebookLogin'
 // import { storage } from "googleapis/build/src/apis/storage";
 
 class Login extends Component {
@@ -20,6 +21,7 @@ class Login extends Component {
                     <div>
                 <GoogleLogin />
                 <GithubLogin />
+                <FacebookLogin />
                 <div>
                     {}
                 </div>

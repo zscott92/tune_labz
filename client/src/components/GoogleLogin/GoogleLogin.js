@@ -2,7 +2,10 @@ import React from 'react';
 import { GoogleLogin } from 'react-google-login-component';
  
 class Login extends React.Component{
-
+ 
+  constructor (props, context) {
+    super(props, context);
+  }
  
   responseGoogle (googleUser) {
     var id_token = googleUser.getAuthResponse().id_token;
@@ -10,6 +13,8 @@ class Login extends React.Component{
     
     console.log({ googleId });
     console.log({accessToken: id_token});
+    //anything else you want to do(save to localStorage)...
+
   }
  
   render () {

@@ -1,5 +1,6 @@
 var AWS = require('aws-sdk');
 var dynamo = new AWS.DynamoDB.DocumentClient({region: 'us-east-1'});
+var trackInfo = require('./models')
 
 exports.handler = function(event, context) {
     var file_path = decodeURIComponent(event.Records[0].s3.object.key.replace(/\+/g, ' '));
@@ -8,9 +9,9 @@ exports.handler = function(event, context) {
     var params = {
         TableName: 'tunelabz',
         Item: {
-            owner: owner,
+            user: trackInfo,
             file: filename,
-            file_path: file_path
+            file_path: file_path,
         }
     };
 
