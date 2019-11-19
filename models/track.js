@@ -1,29 +1,52 @@
+odule.exports = function (sequelize, DataTypes) {
 
-const mongoose = require('mongoose');
-const user = require('./user')
+    var track = sequelize.define("track", {
+        key: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        song_name: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        song_desc: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        s3_song_url: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        song_genres: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
+        song_id: {
+            type: DataTypes.INTEGER,
+            allowNull: true
+        },
+        user_id: {
+            type: DataTypes.INTEGER,
+            allowNull: true
+        },
+        createdAt: {
+            type: DataTypes.DATE,
+            allowNull: true
+        },
+        updatedAt: {
+            type: DataTypes.DATE,
+            allowNull: true
+        }
 
-mongoose
-.connect(process.env.ATLAS_DB, {
-useUnifiedTopology: true,
-useNewUrlParser: true,
-})
-.then(() => console.log('DB Connected!'))
-.catch(err => {
-console.log("DB Connection Error: ${err.message}");
-});
+    });
 
-const childTrack = new mongoose.Schema({
-    owner: [{ type: String, ref: 'Login' }],
-    trackInfo: [{
-        type: String
-    }],
-})
-    const trackSchema = new mongoose.Schema({
-        owner: [{ type: String, ref: 'Login' }],
-        trackInfo: [{
-            type: String
-        }],
-        childid: [childTrack],
-    })
- 
-module.exports = mongoose.model('Track', trackSchema);
+    track.associate = function(db) {
+        db.track.hasMany(db.track, {
+            onDelete: 'CASCADE',
+            foreignKey: 'song_par_id',
+            as: 'nodes',
+        });
+    };
+    return track;
+
+}

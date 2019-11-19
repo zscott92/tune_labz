@@ -1,65 +1,62 @@
-require('dotenv').config();
-const mongoose = require('mongoose');
-const validator = require('validator');
-const Schema = mongoose.Schema;
-const async = require('async');
-const uri = process.env.ATLAS_DB;
-const options = { use: MongoClient };
+module.exports = function (sequelize, DataTypes) {
 
-mongoose.Promise = global.Promise;
-mongoose.set('debug', true);
-
-module.exports = 
-    function autoPopulateSubs(next) {
-    this.populate('subs');
-    next();
-}
-
-const userSchema = new mongoose.Schema({
-    _id: {
-        type: Number,
-        required: true,
-    },
-    email: {
-        type: String,
-        required: true,
-        lowercase: true,
-        validate: (value) => {
-            return validator.isEmail(value)
+    var User = sequelize.define("User", {
+        id: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            primaryKey: true
+        },
+        user_name: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        user_email: DataTypes.STRING,
+        user_password: {
+            type: DataTypes.STRING,
+        },
+        createdAt: {
+            type: DataTypes.DATE,
+            allowNull: true
+        },
+        updatedAt: {
+            type: DataTypes.DATE,
+            allowNull: true
         }
-    },
-    username: {
-        type: String,
-        required: true,
-    },
-    password: {
-        type: String,
-        required: true,
-        minlength: 8,
-        maxlength: 16,
-    },
-    firstname: {
-        type: String,
-        required: true,
-    },
-    lastname: {
-        type: String,
-        required: true,
-    },
-    country: String,
-    age: {
-        type: Number,
-        required: true,
-    }
-})
+    });
 
-userSchema
-    .pre('findOne', autoPopulateSubs)
-    .pre('find', autoPopulateSubs);
+    User.upsertGoogleUser = function (accessToken, refreshToken, profile, cb) {
+        return this.findOne({
+            where: {
+                'googleProviderId': profile.id
+            }
+        }).then((user) => {
+            // no user was found, lets create a ne  w one
+            if (!user) {
+                var newUser = new this({
+                    user_name: profile.displayName,
+                    user_email: profile.emails[0].value,
+                    googleProviderId: profile.id,
+                    googleProviderToken: accessToken
+                });
 
+                newUser.save()
+                    .then(function (savedUser) {
+                        return cb(null, savedUser);
+                    }).catch(function (err) {
+                        return console.log(err);
+                    });
+            } else {
+                cb(null, user);
+            }
+        }).catch(function (err) {
+            return cb(err);
+        })
+    };
 
-const user = mongoose.model('user', userSchema);
-
-function log(data) {
-    console.log(JSON.stringify(data, undefined, 2))
-}
+    User.associate = function (models) {
+        User.hasMany(models.Song, {
+            onDelete: "cascade"
+        });
+    };
+    return User;
+};
